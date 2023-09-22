@@ -25,7 +25,7 @@ const nextConfig = {
     config.plugins.push(
       new webpack.DefinePlugin({
         "process.env.RELEASE_ENV": JSON.stringify(
-          process.env.RELEASE_ENV ?? "develop",
+          process.env.RELEASE_ENV ?? "development",
         ),
       }),
     );
