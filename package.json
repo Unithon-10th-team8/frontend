@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 4000",
     "proxy": "local-ssl-proxy --config proxy.config.json --key localhost-key.pem --cert localhost.pem",
     "build": "next build",
     "start": "next start",
