@@ -1,0 +1,68 @@
+module.exports = {
+  borderColor: ({ theme }) => theme('colors'),
+  borderOpacity: ({ theme }) => theme('opacity'),
+  borderRadius: {
+    none: '0px',
+    3: '3px',
+    4: '4px',
+    5: '5px',
+    6: '6px',
+    8: '8px',
+    12: '12px',
+    16: '16px',
+    24: '24px',
+    32: '32px',
+    full: '9999px',
+  },
+  borderSpacing: ({ theme }) => theme('spacing'),
+  borderWidth: {
+    DEFAULT: '1px',
+    1: '1px',
+    2: '2px',
+    3: '3px',
+    4: '4px',
+    5: '4px',
+    6: '6px',
+    8: '8px',
+  },
+
+  outlineOffset: {
+    0: '0px',
+    1: '1px',
+    2: '2px',
+    4: '4px',
+    8: '8px',
+  },
+  outlineWidth: {
+    0: '0px',
+    1: '1px',
+    2: '2px',
+    4: '4px',
+    8: '8px',
+  },
+
+  ringOffsetWidth: {
+    0: '0px',
+    1: '1px',
+    2: '2px',
+    3: '3px',
+    4: '4px',
+    8: '8px',
+  },
+
+  ringWidth: {
+    DEFAULT: '1px',
+    0: '0px',
+    1: '1px',
+    2: '2px',
+    3: '3px',
+    4: '4px',
+    8: '8px',
+  },
+  strokeWidth: {
+    0: '0',
+    1: '1',
+    2: '2',
+    3: '3',
+  },
+};
