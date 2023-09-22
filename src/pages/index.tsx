@@ -1,3 +1,14 @@
+import useCount from "share/store/useCount";
+
 export default function Home() {
-  return <div className="bg-white text-red-500">hello world</div>;
+  const { increaseCount, count } = useCount();
+
+  return (
+    <div className="text-red-500 bg-white">
+      <div className="flex">
+        <button onClick={increaseCount}>카운트 증가</button>
+      </div>
+      {count}
+    </div>
+  );
 }
