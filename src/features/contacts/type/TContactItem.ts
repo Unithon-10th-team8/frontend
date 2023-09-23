@@ -1,5 +1,5 @@
 export type TContactItem = {
-  id: number;
+  id: string;
   name: string;
   tags: string[];
 };
