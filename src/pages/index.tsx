@@ -28,10 +28,9 @@ export default function Home() {
   );
   return (
     <>
-      {filteredData?.length &&
-        filteredData.map((data) => (
-          <NotificationBelt filteredData={data} key={data.id} />
-        ))}
+      {filteredData?.map((data) => (
+        <NotificationBelt filteredData={data} key={data.id} />
+      ))}
       <div className="px-[20px] pb-[20px]">
         <h1
           className={classNames(

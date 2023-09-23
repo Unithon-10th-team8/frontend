@@ -8,7 +8,7 @@ export const Navbar = () => {
 
   return (
     <nav className="fixed bottom-0 mx-auto my-0 w-full max-w-[480px] bg-[#232323] px-20 pb-[27px] pt-[10px]">
-      <ul className="flex justify-center gap-16">
+      <ul className="flex justify-around gap-16">
         {NAVBAR_MENU_LIST.map((menu, index) => {
           const IconComponent = menu.icon;
           const currentPathname = router.pathname;

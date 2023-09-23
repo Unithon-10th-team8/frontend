@@ -48,7 +48,7 @@ export const UserSelectModal = ({ isOpen, setIsOpen, setUser }: Props) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="shadow-xl w-full max-w-md transform overflow-hidden rounded-[8px] bg-[#1a1b1d] p-6 px-20 text-left align-middle transition-all">
+                <Dialog.Panel className="shadow-xl w-full max-w-md transform overflow-hidden rounded-[8px] bg-[#1a1b1d] p-[20px] text-left align-middle transition-all">
                   <Dialog.Title
                     as="h3"
                     className="text-lg leading-6 font-medium"
