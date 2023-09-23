@@ -1,7 +1,7 @@
 import { ContactDetail } from "@/features/contactDetail/ContactDetail";
 
-const AddContact = () => {
+const AddContactPage = () => {
   return <ContactDetail />;
 };
 
-export default AddContact;
+export default AddContactPage;
