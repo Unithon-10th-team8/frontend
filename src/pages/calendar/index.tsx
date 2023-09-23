@@ -107,7 +107,7 @@ function PageCalendar() {
               >
                 {name || "[제목 없음]"}
               </div>
-              <Link href="/calendar/edit" className="ml-auto">
+              <Link href={`calendar/${id}`} className="ml-auto">
                 <Image
                   width={20}
                   height={20}

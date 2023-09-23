@@ -4,11 +4,12 @@ import { UserSelectModal } from "@/components/userSelectModal/UserSelectModal";
 import { CONTACT_IMAGES } from "@/constants";
 import { TContactItem } from "@/features/contacts/type/TContactItem";
 import { useCreateCalendar } from "@/fetchers";
+import { useGetCalendarByCalendarId } from "@/fetchers/calendar/useGetCalendarByCalendarId";
 import classNames from "classnames";
 import dayjs from "dayjs";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const 카테고리 = ["경조사", "미팅", "식사", "계약"];
 
@@ -27,6 +28,8 @@ export const FormCalendar = ({ isEditMode }: Props) => {
   const { trigger, isMutating, error } = useCreateCalendar();
 
   const calendarId = query.calendarId as string;
+
+  const { data, mutate } = useGetCalendarByCalendarId(calendarId);
 
   const [isStartDateModalOpen, setIsStartDateModalOpen] = useState(false);
   const [isEndDateModalOpen, setIsEndDateModalOpen] = useState(false);
@@ -67,6 +70,25 @@ export const FormCalendar = ({ isEditMode }: Props) => {
     });
   };
 
+  useEffect(() => {
+    if (data && isEditMode) {
+      setFormValues({
+        title: data.calendar.name,
+        startDate: data.calendar.start_dt,
+        endDate: data.calendar.end_dt ?? "",
+        tags: data.calendar.tags ?? [],
+        memo: data.calendar.content ?? "",
+        isImportant: data.calendar.is_important,
+      });
+
+      setUser({
+        id: data.contacts?.[0]?.id,
+        name: data.contacts?.[0]?.name,
+        tags: data.contacts?.[0]?.tags,
+      });
+    }
+  }, [data, isEditMode]);
+
   return (
     <div className="flex flex-col px-[20px]">
       {/* 네비게이션바 */}
@@ -89,6 +111,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
             title: e.target.value,
           });
         }}
+        value={formValues.title}
       />
       <div className="flex">
         <button
@@ -195,6 +218,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       <button
         className="bg-surface rounded-12 px-16 py-[15px] text-left text-[15px] text-[#696969] focus:outline-none"
         placeholder="기타 메모"
+        value={formValues.memo}
         onClick={() => setOpen(true)}
       >
         {user.id !== "0" ? user.name : "고객 선택"}
