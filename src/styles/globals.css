@@ -84,3 +84,9 @@ input:-webkit-autofill:active {
   -webkit-background-clip: text !important;
   background-clip: text !important;
 }
+
+input::-webkit-inner-spin-button {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}

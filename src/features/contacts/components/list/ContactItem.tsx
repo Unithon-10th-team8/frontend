@@ -33,7 +33,7 @@ export const ContactItem = ({
   return (
     <Link
       href={isSelectMode ? "" : contactDetailLink}
-      className="border-b-solid flex animate-fade-in items-center justify-between border-b-[1px] border-b-[#353639] pb-[15px] pl-[19px] pr-[20px] pt-[15px] duration-200 hover:bg-surface"
+      className="border-b-solid hover:bg-surface flex animate-fade-in items-center justify-between border-b-[1px] border-b-[#353639] pb-[15px] pl-[19px] pr-[20px] pt-[15px] duration-200"
       onClick={handleClick}
     >
       {/* TODO: 이미지 태그로 대체 */}
@@ -47,7 +47,12 @@ export const ContactItem = ({
             height={58}
           />
         ) : (
-          <div className="h-[58px] w-[58px] rounded-full bg-[#444]"></div>
+          <div
+            className="flex h-[58px] w-[58px] items-center justify-center rounded-full bg-[#444] text-[24px] font-[600] text-[#fff]
+          "
+          >
+            {name[0].toUpperCase()}
+          </div>
         )}
         <div className="ml-[17px]">
           <span className="text-[16px] font-[600]">{name}</span>
@@ -55,7 +60,7 @@ export const ContactItem = ({
             {tags.map((tag, index) => (
               <span
                 key={index}
-                className="mr-[4px] rounded-3 bg-blackAlpha-500 px-[7px] py-[3px] text-12 font-[400] text-muted"
+                className="text-muted mr-[4px] rounded-3 bg-blackAlpha-500 px-[7px] py-[3px] text-12 font-[400]"
               >
                 {tag}
               </span>
