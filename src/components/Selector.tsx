@@ -11,10 +11,10 @@ type Props = {
 };
 
 export const Selector = ({ items, className = "", onChange }: Props) => {
-  const [value, setValue] = useState(items[0] || "직장");
+  const [value, setValue] = useState(items[0]);
   useEffect(() => {
-    onChange?.(items[0] || "직장");
-    setValue(items[0] || "직장");
+    onChange?.(items[0]);
+    setValue(items[0]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onChange]);
 
