@@ -1,3 +1,6 @@
+import { useGetContacts, useUpdateContactImportance } from "@/fetchers";
+import toast from "react-hot-toast";
+
 type Props = {
   isBookmarked: boolean;
   contactId: string;
@@ -6,10 +9,21 @@ type Props = {
 export const ButtonContactBookmark = ({ isBookmarked, contactId }: Props) => {
   const fillColor = isBookmarked ? "#5F95FF" : "#444444";
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const { trigger, isMutating } = useUpdateContactImportance();
+  const { mutate } = useGetContacts({});
+
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     e.preventDefault();
     // click event handler
+
+    await toast.promise(trigger({ id: contactId }), {
+      loading: "즐겨찾기를 변경하는 중...",
+      success: "즐겨찾기가 변경되었습니다!",
+      error: "즐겨찾기 변경을 실패했습니다.",
+    });
+
+    mutate();
   };
 
   return (

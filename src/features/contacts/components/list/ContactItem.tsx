@@ -6,6 +6,7 @@ import Link from "next/link";
 type Props = {
   isSelectMode?: boolean;
   setUser?: (user: TContactItem) => void;
+  isBookmarked?: boolean;
 } & TContactItem;
 
 export const ContactItem = ({
@@ -15,6 +16,7 @@ export const ContactItem = ({
   setUser,
   imageSrc,
   isSelectMode = false,
+  isBookmarked,
 }: Props) => {
   const contactDetailLink = `/contacts/${id}`;
 
@@ -61,7 +63,12 @@ export const ContactItem = ({
           </div>
         </div>
       </div>
-      {!isSelectMode && <ButtonContactBookmark isBookmarked contactId={id} />}
+      {!isSelectMode && (
+        <ButtonContactBookmark
+          isBookmarked={isBookmarked ?? false}
+          contactId={id}
+        />
+      )}
     </Link>
   );
 };

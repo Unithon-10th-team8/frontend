@@ -48,6 +48,7 @@ export const ContactsListContainer = ({ searchQuery, category }: Props) => {
             name={contact.name}
             tags={getContactTags(contact)}
             imageSrc={contact.profile_image_url}
+            isBookmarked={contact.is_important}
           />
         ))
       )}
