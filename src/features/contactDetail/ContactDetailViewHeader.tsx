@@ -23,9 +23,9 @@ export const ContactDetailViewHeader = ({}: ContactDetailViewHeaderProps) => {
               <path
                 d="M7 1.5L1 8L7 14.5"
                 stroke="white"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>
