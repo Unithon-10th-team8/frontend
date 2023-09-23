@@ -38,7 +38,7 @@ export const HeaderContacts = ({
           />
         )}
         <HeaderSearchContactButton setIsSearchMode={setIsSearchMode} />
-        <HeaderShowMoreButton />
+        {/* <HeaderShowMoreButton /> */}
       </div>
     </div>
   );

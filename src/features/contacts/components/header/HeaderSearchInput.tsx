@@ -16,8 +16,11 @@ export const HeaderSearchInput = ({
   return (
     <div className="flex flex-1 animate-fade-in items-center">
       <button
-        className="ml-[-16px] mr-[7px]"
-        onClick={() => setIsSearchMode(false)}
+        className="ml-[-40px] mr-[7px]"
+        onClick={() => {
+          setIsSearchMode(false);
+          setSearchQuery("");
+        }}
       >
         <svg
           width="20"
