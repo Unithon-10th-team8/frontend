@@ -6,7 +6,7 @@ import { ContactDetailProfileImage } from "./ContactDetailProfileImage";
 import { ContactDetailShowMore } from "./ContactDetailShowMore";
 import { ContactDetailViewHeader } from "./ContactDetailViewHeader";
 import { FormProvider, useForm, useFormState } from "react-hook-form";
-import { Profile, contactDetailValidationSchema } from "./validationSchema";
+import { Profile, contactDetailValidationSchema } from "@/constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 type Props = {

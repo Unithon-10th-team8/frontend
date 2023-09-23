@@ -2,7 +2,7 @@ import { InputGroup, Switch, TextArea } from "@/components";
 import { FieldItem } from "@/components/FieldItem";
 import classNames from "classnames";
 import { Controller, useFormContext, useWatch } from "react-hook-form";
-import { Profile } from "./validationSchema";
+import { Profile } from "@/constants";
 
 export const ContactDetailOptionalFormItems = () => {
   const { control } = useFormContext<Profile>();
