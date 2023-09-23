@@ -11,12 +11,14 @@ type Props = {
   data?: any;
   onClickDate?: (date: Dayjs) => void;
   initialDate?: Dayjs;
+  afterClickDate?: () => void;
 };
 
 export const Calendar = ({
   data,
   onClickDate,
   initialDate: initialDateParent,
+  afterClickDate,
 }: Props) => {
   const [initialDate, setInitialDate] = useState(dayjs());
   const calendarDate = generateCalendarDataFromApiData(data);
@@ -35,6 +37,11 @@ export const Calendar = ({
     const nextDate = initialDate.add(1, "month").date(1);
     setInitialDate(initialDate.add(1, "month"));
     onClickDate?.(nextDate);
+  };
+
+  const handleClickDate = (date: Dayjs) => {
+    onClickDate?.(date);
+    afterClickDate?.();
   };
 
   return (
@@ -76,7 +83,7 @@ export const Calendar = ({
               isCurrentMonth={isCurrentMonth}
               hasPlainEvent={eventData?.hasPlainEvent}
               hasImportantEvent={eventData?.hasImportantEvent}
-              onClickDate={onClickDate}
+              onClickDate={handleClickDate}
               isSelected={date.isSame(initialDateParent, "day")}
             />
           );

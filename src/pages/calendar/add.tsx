@@ -1,7 +1,10 @@
 import { TextArea } from "@/components";
+import { DatePicker } from "@/components/datePicker/DatePicker";
 import { UserSelectModal } from "@/components/userSelectModal/UserSelectModal";
 import { CONTACT_IMAGES } from "@/constants";
 import { TContactItem } from "@/features/contacts/type/TContactItem";
+import { useCreateCalendar } from "@/fetchers";
+import dayjs from "dayjs";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -15,6 +18,18 @@ const AddPage = () => {
     id: 0,
     name: "",
     tags: [],
+  });
+  const { trigger, isMutating, error } = useCreateCalendar();
+
+  const [isStartDateModalOpen, setIsStartDateModalOpen] = useState(false);
+  const [isEndDateModalOpen, setIsEndDateModalOpen] = useState(false);
+
+  const [formValues, setFormValues] = useState({
+    title: "",
+    startDate: "",
+    endDate: "",
+    category: "",
+    memo: "",
   });
 
   return (
@@ -46,7 +61,43 @@ const AddPage = () => {
       </div>
       {/* 날짜 */}
       <div className="my-[16px] text-[15px] font-medium">날짜</div>
-      <div className="mb-[14px] mr-10 flex w-full items-center justify-between rounded-[12px] bg-[#353639] p-[15px]">
+      <button
+        className="bg-surface mb-8 rounded-12 px-16 py-[15px] text-left text-[15px] text-[#696969] focus:outline-none"
+        onClick={() => setIsStartDateModalOpen(true)}
+      >
+        {formValues.startDate
+          ? dayjs(formValues.startDate).format("YYYY-MM-DD")
+          : "시작 날짜 선택"}
+      </button>
+      <DatePicker
+        isOpen={isStartDateModalOpen}
+        setIsOpen={setIsStartDateModalOpen}
+        setDate={(date) => {
+          setFormValues({
+            ...formValues,
+            startDate: date.toISOString(),
+          });
+        }}
+      />
+      <button
+        className="bg-surface rounded-12 px-16 py-[15px] text-left text-[15px] text-[#696969] focus:outline-none"
+        onClick={() => setIsEndDateModalOpen(true)}
+      >
+        {formValues.endDate
+          ? dayjs(formValues.endDate).format("YYYY-MM-DD")
+          : "종료 날짜 선택"}
+      </button>
+      <DatePicker
+        isOpen={isEndDateModalOpen}
+        setIsOpen={setIsEndDateModalOpen}
+        setDate={(date) => {
+          setFormValues({
+            ...formValues,
+            endDate: date.toISOString(),
+          });
+        }}
+      />
+      {/* <div className="mb-[14px] mr-10 flex w-full items-center justify-between rounded-[12px] bg-[#353639] p-[15px]">
         <input className="mb-16 mt-8 w-[60px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
         년
         <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
@@ -69,7 +120,7 @@ const AddPage = () => {
         시
         <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
         분
-      </div>
+      </div> */}
       {/* 고객 */}
       <div className="my-[16px] text-[15px] font-medium">고객</div>
       <button
