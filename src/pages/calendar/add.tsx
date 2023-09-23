@@ -55,7 +55,7 @@ const AddPage = () => {
       },
     };
     trigger({
-      contactId: "14069e61-0ec5-49d1-98ba-ff411da6cefb",
+      contactId: user.id,
       calendar: apiFormValues as any,
     });
   };

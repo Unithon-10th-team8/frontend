@@ -2,7 +2,6 @@ import { HeaderAddContactButton } from "@/features/contacts/components/header/He
 import { HeaderCategorySelector } from "@/features/contacts/components/header/HeaderCategorySelector";
 import { HeaderSearchContactButton } from "@/features/contacts/components/header/HeaderSearchContactButton";
 import { HeaderSearchInput } from "@/features/contacts/components/header/HeaderSearchInput";
-import { HeaderShowMoreButton } from "@/features/contacts/components/header/HeaderShowMoreButton";
 import { Dispatch, SetStateAction, useState } from "react";
 
 type Props = {
@@ -38,7 +37,7 @@ export const HeaderContacts = ({
           />
         )}
         <HeaderSearchContactButton setIsSearchMode={setIsSearchMode} />
-        <HeaderShowMoreButton />
+        {/* <HeaderShowMoreButton /> */}
       </div>
     </div>
   );
