@@ -1,6 +1,6 @@
 type Props = {
   isBookmarked: boolean;
-  contactId: number;
+  contactId: string;
 };
 
 export const ButtonContactBookmark = ({ isBookmarked, contactId }: Props) => {

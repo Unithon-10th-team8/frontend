@@ -7,3 +7,4 @@ export * from "./Divider";
 export * from "./TextArea";
 export * from "./Switch";
 export * from "./navbar/Navbar";
+export * from "./Selector";

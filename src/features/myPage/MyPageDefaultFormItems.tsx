@@ -1,9 +1,8 @@
 import { Input, InputGroup, InputGroupDivider, TextButton } from "@/components";
 import { Controller, useFormContext } from "react-hook-form";
-import { Profile } from "@/constants";
 
 export const MyPageDefaultFormItems = () => {
-  const { control } = useFormContext<Profile>();
+  const { control } = useFormContext<any>();
 
   return (
     <>

@@ -1,31 +1,45 @@
-import { Input, InputGroup, InputGroupDivider } from "@/components";
+import { ContactInput } from "@/api";
+import { Input, InputGroup, InputGroupDivider, Selector } from "@/components";
+import { FieldItem } from "@/components/FieldItem";
+import { removeNull } from "@/utils";
 import { Controller, useFormContext } from "react-hook-form";
-import { Profile } from "@/constants";
 
 export const ContactDetailDefaultFormItems = () => {
-  const { control } = useFormContext<Profile>();
+  const { control } = useFormContext<ContactInput>();
 
   return (
     <>
       <Controller
         control={control}
         name="name"
-        render={({ field }) => <Input {...field} placeholder="이름" />}
+        render={({ field: { value, ...field } }) => (
+          <Input {...field} value={value} placeholder="이름" />
+        )}
       />
       <InputGroup>
         <Controller
           control={control}
-          name="affiliation"
-          render={({ field }) => (
-            <Input {...field} variant="start" placeholder="소속" />
+          name="organization"
+          render={({ field: { value, ...field } }) => (
+            <Input
+              {...field}
+              value={removeNull(value)}
+              variant="start"
+              placeholder="소속"
+            />
           )}
         />
         <InputGroupDivider />
         <Controller
           control={control}
-          name="rank"
-          render={({ field }) => (
-            <Input {...field} variant="end" placeholder="직급" />
+          name="position"
+          render={({ field: { value, ...field } }) => (
+            <Input
+              {...field}
+              value={removeNull(value)}
+              variant="end"
+              placeholder="직급"
+            />
           )}
         />
       </InputGroup>
@@ -33,19 +47,41 @@ export const ContactDetailDefaultFormItems = () => {
         <Controller
           control={control}
           name="phone"
-          render={({ field }) => (
-            <Input {...field} variant="start" placeholder="연락처" />
+          render={({ field: { value, ...field } }) => (
+            <Input
+              {...field}
+              value={removeNull(value)}
+              variant="start"
+              placeholder="연락처"
+            />
           )}
         />
         <InputGroupDivider />
         <Controller
           control={control}
           name="email"
-          render={({ field }) => (
-            <Input {...field} variant="end" placeholder="이메일" />
+          render={({ field: { value, ...field } }) => (
+            <Input
+              {...field}
+              value={removeNull(value)}
+              variant="end"
+              placeholder="이메일"
+            />
           )}
         />
       </InputGroup>
+      <Controller
+        control={control}
+        name="category"
+        render={({ field }) => (
+          <FieldItem label="분류">
+            <Selector
+              onChange={field.onChange}
+              items={["직장", "거래처", "고객", "기타"]}
+            />
+          </FieldItem>
+        )}
+      />
     </>
   );
 };
