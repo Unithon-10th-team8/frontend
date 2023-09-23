@@ -37,6 +37,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
     endDate: "",
     tags: [] as string[],
     memo: "",
+    isImportant: false,
   });
 
   const handleSubmit = () => {
@@ -46,7 +47,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       end_dt: dayjs(formValues.endDate).toISOString(),
       is_all_day: true,
       // remind_interval: 10,
-      is_important: true,
+      is_important: formValues.isImportant,
 
       content: formValues.memo,
       // is_complete: true,
@@ -90,14 +91,42 @@ export const FormCalendar = ({ isEditMode }: Props) => {
         }}
       />
       <div className="flex">
-        <div className="mr-10 flex w-fit cursor-pointer items-center  rounded-[24px] border-1 border-solid border-[#84F44F] bg-[#353639] px-12 py-4">
+        <button
+          className={classNames(
+            "mr-10 flex w-fit cursor-pointer items-center  rounded-[24px] border-1 border-solid bg-[#353639] px-12 py-4",
+
+            formValues.isImportant
+              ? "border-1 border-solid border-[#84F44F] bg-[#454545]"
+              : "border-none",
+          )}
+          onClick={() => {
+            setFormValues({
+              ...formValues,
+              isImportant: true,
+            });
+          }}
+        >
           <div className={`mr-4 h-[9px] w-[9px] rounded-[50%] bg-[#84F44F] `} />
           주요
-        </div>
-        <div className="flex w-fit cursor-pointer items-center rounded-[24px]  border-1 border-solid border-[#5F95FF] bg-[#353639] px-12  py-4">
+        </button>
+        <button
+          className={classNames(
+            "flex w-fit cursor-pointer items-center rounded-[24px]  border-1 border-solid border-[#5F95FF] bg-[#353639] px-12  py-4",
+
+            !formValues.isImportant
+              ? "border-1 border-solid border-[#5F95FF] bg-[#454545]"
+              : "border-none",
+          )}
+          onClick={() => {
+            setFormValues({
+              ...formValues,
+              isImportant: false,
+            });
+          }}
+        >
           <div className={`mr-4 h-[9px] w-[9px] rounded-[50%] bg-[#5F95FF] `} />
           일반
-        </div>
+        </button>
       </div>
       {/* 날짜 */}
       <div className="my-[16px] text-[15px] font-medium">날짜</div>
