@@ -72,9 +72,9 @@ export const ContactDetail = ({ profile }: Props) => {
           />
         )}
         <ContactDetailProfileImage isAllowEdit={!profile} />
-        <ContactDetailDefaultFormItems />
+        <ContactDetailDefaultFormItems isAllowEdit={!profile} />
         {profile && <ContactDetailCalendar />}
-        {isShowOptional ? (
+        {isShowOptional || !!profile ? (
           <ContactDetailOptionalFormItems isAllowEdit={!profile} />
         ) : (
           <ContactDetailShowMore onClick={() => setIsShowOptional(true)} />
