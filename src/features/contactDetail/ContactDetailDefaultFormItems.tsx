@@ -1,6 +1,6 @@
 import { Input, InputGroup, InputGroupDivider } from "@/components";
 import { Controller, useFormContext } from "react-hook-form";
-import { Profile } from "./validationSchema";
+import { Profile } from "@/constants";
 
 export const ContactDetailDefaultFormItems = () => {
   const { control } = useFormContext<Profile>();
