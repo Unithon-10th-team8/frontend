@@ -47,6 +47,12 @@
   color: white;
   font-family: "Pretendard" !important;
   font-weight: 400;
+
+  box-sizing: border-box;
+}
+
+*:not(input):not(textarea) {
+  user-select: none;
 }
 
 *::-webkit-scrollbar {
