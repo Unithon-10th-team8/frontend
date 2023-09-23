@@ -6,7 +6,7 @@ interface CountState {
   increaseCount: () => void;
 }
 
-// example
+// Example
 const useCount = create<CountState>()(
   devtools((set) => ({
     count: 0,
