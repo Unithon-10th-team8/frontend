@@ -21,7 +21,12 @@ export const HeaderContacts = ({ setSearchQuery }: Props) => {
         }`}
       >
         <HeaderAddContactButton className={isSearchMode ? "hidden" : ""} />
-        {isSearchMode && <HeaderSearchInput setSearchQuery={setSearchQuery} />}
+        {isSearchMode && (
+          <HeaderSearchInput
+            setSearchQuery={setSearchQuery}
+            setIsSearchMode={setIsSearchMode}
+          />
+        )}
         <HeaderSearchContactButton setIsSearchMode={setIsSearchMode} />
         <HeaderShowMoreButton />
       </div>
