@@ -1,5 +1,5 @@
 import { ContactDetail } from "@/features/contactDetail/ContactDetail";
-import { Profile } from "@/features/contactDetail/validationSchema";
+import { Profile } from "@/constants";
 
 const AddContact = () => {
   const profile: Profile = {
