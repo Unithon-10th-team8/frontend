@@ -1,9 +1,14 @@
 import Image from "next/image";
 import { CONTACT_IMAGES } from "@/constants";
+import { Dispatch, SetStateAction } from "react";
 
-export const HeaderSearchContactButton = () => {
+type Props = {
+  setIsSearchMode: Dispatch<SetStateAction<boolean>>;
+};
+
+export const HeaderSearchContactButton = ({ setIsSearchMode }: Props) => {
   return (
-    <div>
+    <button onClick={() => setIsSearchMode((prev) => !prev)}>
       <Image
         height={6}
         width={12}
@@ -11,6 +16,6 @@ export const HeaderSearchContactButton = () => {
         src={CONTACT_IMAGES.iconContactSearch}
         className="h-[20px] w-[20px]"
       />
-    </div>
+    </button>
   );
 };

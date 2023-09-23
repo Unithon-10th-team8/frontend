@@ -4,9 +4,15 @@ import { Menu } from "@headlessui/react";
 import { HEADER_CATEGORY_LIST } from "@/features/contacts/constants/headerCategoryList";
 import { DividerSelector } from "@/features/contacts/components/header/selector/DividerSelector";
 
-export const HeaderCategorySelector = () => {
+type Props = {
+  className?: string;
+};
+
+export const HeaderCategorySelector = ({ className = "" }: Props) => {
   return (
-    <div className="p-x-[4px] p-y-[2px] relative flex items-center">
+    <div
+      className={`p-x-[4px] p-y-[2px] relative flex items-center ${className}`}
+    >
       <Menu>
         <Menu.Button>
           <div className="p-x-[4px] p-y-[2px] flex items-center">

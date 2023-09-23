@@ -1,16 +1,18 @@
 import { CONTACT_IMAGES } from "@/constants";
 import Image from "next/image";
 
-export const HeaderAddContactButton = () => {
+type Props = {
+  className?: string;
+};
+
+export const HeaderAddContactButton = ({ className }: Props) => {
   return (
-    <div>
-      <Image
-        height={6}
-        width={12}
-        alt="iconChevronDown"
-        src={CONTACT_IMAGES.iconContactAdd}
-        className="ml-[4px] h-[20px] w-[20px]"
-      />
-    </div>
+    <Image
+      height={20}
+      width={20}
+      alt="iconChevronDown"
+      src={CONTACT_IMAGES.iconContactAdd}
+      className={`h-[20px] ${className}`}
+    />
   );
 };
