@@ -2,12 +2,18 @@ import { DAY_NAMES } from "@/components/calendar/constants/dayNames";
 import { CalendarDay } from "@/components/calendar/items/CalendarDay";
 import { IconCalendarChevronLeft } from "@/components/calendar/items/IconCalendarChevronLeft";
 import { IconCalendarChevronRight } from "@/components/calendar/items/IconCalendarChevronRight";
+import { generateCalendarDataFromApiData } from "@/components/calendar/modules/generateCalendarDataFromApiData";
 import { getCalendarDays } from "@/components/calendar/modules/getCalendarDays";
 import dayjs from "dayjs";
 import { useState } from "react";
 
-export const Calendar = () => {
+type Props = {
+  data: any;
+};
+
+export const Calendar = ({ data }: any) => {
   const [initialDate, setInitialDate] = useState(dayjs());
+  const calendarDate = generateCalendarDataFromApiData(data);
 
   const days = getCalendarDays(initialDate);
   const monthText = initialDate.format("MMM");
@@ -48,12 +54,18 @@ export const Calendar = () => {
 
         {days.map((date) => {
           const isCurrentMonth = date.isSame(initialDate, "month");
+          const dateFormatted = date.format("YYYY-MM-DD");
+          const eventData = calendarDate.find(
+            (event: any) => event.date === dateFormatted,
+          );
 
           return (
             <CalendarDay
               key={date.format("YYYY-MM-DD")}
               date={date}
               isCurrentMonth={isCurrentMonth}
+              hasPlainEvent={eventData?.hasPlainEvent}
+              hasImportantEvent={eventData?.hasImportantEvent}
             />
           );
         })}
