@@ -1,12 +1,12 @@
 import { TextButton } from "@/components";
 import { useWatch } from "react-hook-form";
-import { Profile } from "@/constants";
 import Link from "next/link";
+import { ContactInput } from "@/api";
 
 export type ContactDetailViewHeaderProps = {};
 
 export const ContactDetailViewHeader = ({}: ContactDetailViewHeaderProps) => {
-  const { name } = useWatch<Profile>();
+  const { name } = useWatch<ContactInput>();
 
   return (
     <div className="flex h-48 items-center justify-between">

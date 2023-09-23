@@ -1,23 +1,22 @@
+import { ContactInput } from "@/api";
 import { InputGroup, Switch, TextArea } from "@/components";
 import { FieldItem } from "@/components/FieldItem";
+import { removeNull } from "@/utils";
 import classNames from "classnames";
-import { Controller, useFormContext, useWatch } from "react-hook-form";
-import { Profile } from "@/constants";
+import { useState } from "react";
+import { Controller, useFormContext } from "react-hook-form";
 
 export const ContactDetailOptionalFormItems = () => {
-  const { control } = useFormContext<Profile>();
-  const { isEnableAlarm } = useWatch<Profile>();
+  const { control } = useFormContext<ContactInput>();
+  const [isEnableAlarm, setIsEnableAlarm] = useState(false);
 
   return (
     <>
       <InputGroup>
         <FieldItem label="연락 알람 설정">
-          <Controller
-            control={control}
-            name="isEnableAlarm"
-            render={({ field: { value, onChange } }) => (
-              <Switch defaultValue={value} onChange={onChange} />
-            )}
+          <Switch
+            defaultValue={isEnableAlarm}
+            onChange={(checked) => setIsEnableAlarm(checked)}
           />
         </FieldItem>
         <div
@@ -30,28 +29,22 @@ export const ContactDetailOptionalFormItems = () => {
         >
           <Controller
             control={control}
-            name="alarmMonth"
-            render={({ field }) => (
+            name="repeat_interval"
+            render={({ field: { value, onChange, ...field } }) => (
               <input
                 {...field}
+                onChange={(e) => {
+                  e.target.value = e.target.value.replace(/[^0-9]/g, "");
+
+                  onChange(e);
+                }}
+                value={removeNull(value)}
                 type="text"
                 className="mr-4 w-16 border-b-2 border-[#5E5E5E] bg-transparent text-right focus:outline-none"
               />
             )}
           />{" "}
-          개월마다{" "}
-          <Controller
-            control={control}
-            name="alarmDay"
-            render={({ field }) => (
-              <input
-                {...field}
-                type="text"
-                className="mr-4 w-16 border-b-2 border-[#5E5E5E] bg-transparent text-right focus:outline-none"
-              />
-            )}
-          />{" "}
-          일에 알람 설정
+          개월마다 알람 설정
         </div>
       </InputGroup>
       <TextArea placeholder="기타 메모" />
