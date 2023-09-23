@@ -32,9 +32,7 @@ export type InputGroupProps = {
 
 export const InputGroup = ({ children }: InputGroupProps) => {
   return (
-    <div className="flex w-full flex-col overflow-hidden rounded-12 bg-surface">
-      {children}
-    </div>
+    <div className="flex w-full flex-col rounded-12 bg-surface">{children}</div>
   );
 };
 
