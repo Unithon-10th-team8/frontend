@@ -1,5 +1,6 @@
 import { ButtonContactBookmark } from "@/features/contacts/components/button/ButtonContactBookmark";
 import { TContactItem } from "@/features/contacts/type/TContactItem";
+import Image from "next/image";
 import Link from "next/link";
 
 type Props = {
@@ -12,6 +13,7 @@ export const ContactItem = ({
   name,
   tags,
   setUser,
+  imageSrc,
   isSelectMode = false,
 }: Props) => {
   const contactDetailLink = `/contacts/${id}`;
@@ -34,7 +36,17 @@ export const ContactItem = ({
     >
       {/* TODO: 이미지 태그로 대체 */}
       <div className="flex">
-        <div className="h-[58px] w-[58px] rounded-full bg-[#444]" />
+        {imageSrc ? (
+          <Image
+            src={imageSrc ?? ""}
+            alt="프로필 이미지"
+            className="h-[58px] w-[58px] rounded-full bg-[#444]"
+            width={58}
+            height={58}
+          />
+        ) : (
+          <div className="h-[58px] w-[58px] rounded-full bg-[#444]"></div>
+        )}
         <div className="ml-[17px]">
           <span className="text-[16px] font-[600]">{name}</span>
           <div className="mt-[4px] flex flex-wrap gap-[7px]">
