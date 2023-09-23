@@ -36,8 +36,6 @@ export const ContactDetailCalendar = () => {
     limit: 100,
   });
 
-  console.log("ddd", data);
-
   // filter data that falls in to the range of start_dt and end_dt
   const filteredData = data?.filter(
     ({ start_dt, end_dt }) =>
