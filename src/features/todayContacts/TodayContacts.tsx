@@ -3,19 +3,19 @@ import React from "react";
 const contacts = [
   {
     id: 0,
-    bgColor: "#84F44F",
+    bgColor: "bg-[#84F44F]",
     schedule: "12:00 - 14:00",
     contents: "외부 미팅",
   },
   {
     id: 1,
-    bgColor: "#5F95FF",
+    bgColor: "bg-[#f00]",
     schedule: "12:00 - 14:00",
     contents: "식사",
   },
   {
     id: 2,
-    bgColor: "#84F44F",
+    bgColor: "bg-[#000]",
     schedule: "12:00 - 14:00",
     contents: "계약날",
   },
@@ -31,7 +31,7 @@ const TodayContacts = () => {
             className="flex w-full items-center gap-10 rounded-12 bg-[#353639] px-[20px] py-[24px]"
             key={id}
           >
-            <div className={`h-[9px] w-[9px] rounded-[50%] bg-[${bgColor}]`} />
+            <div className={`h-[9px] w-[9px] rounded-[50%] ${bgColor}`} />
             <div>{schedule}</div>
             <div>{contents}</div>
           </li>
