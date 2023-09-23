@@ -10,9 +10,14 @@ import { useState } from "react";
 type Props = {
   data?: any;
   onClickDate?: (date: Dayjs) => void;
+  initialDate?: Dayjs;
 };
 
-export const Calendar = ({ data, onClickDate }: Props) => {
+export const Calendar = ({
+  data,
+  onClickDate,
+  initialDate: initialDateParent,
+}: Props) => {
   const [initialDate, setInitialDate] = useState(dayjs());
   const calendarDate = generateCalendarDataFromApiData(data);
 
@@ -68,6 +73,7 @@ export const Calendar = ({ data, onClickDate }: Props) => {
               hasPlainEvent={eventData?.hasPlainEvent}
               hasImportantEvent={eventData?.hasImportantEvent}
               onClickDate={onClickDate}
+              isSelected={date.isSame(initialDateParent, "day")}
             />
           );
         })}

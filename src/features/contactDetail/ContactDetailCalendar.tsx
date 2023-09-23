@@ -33,6 +33,7 @@ export const ContactDetailCalendar = () => {
         onClickDate={(date) => {
           setInitialDate(date);
         }}
+        initialDate={initialDate}
       />
       <div className="mt-4 px-20">
         <p className="pb-8 text-[15px]">{dateText}일</p>

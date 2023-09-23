@@ -1,6 +1,7 @@
 import { Dayjs } from "dayjs";
 import classnames from "classnames";
 import { CalendarMarkerEvent } from "@/components/calendar/items/marker/CalendarMarkerEvent";
+import classNames from "classnames";
 
 type Props = {
   date: Dayjs;
@@ -8,6 +9,7 @@ type Props = {
   hasPlainEvent: boolean;
   hasImportantEvent: boolean;
   onClickDate?: (date: Dayjs) => void;
+  isSelected?: boolean;
 };
 
 export const CalendarDay = ({
@@ -16,6 +18,7 @@ export const CalendarDay = ({
   hasPlainEvent,
   hasImportantEvent,
   onClickDate,
+  isSelected,
 }: Props) => {
   const dayText = date.format("D");
   const handleClickDate = () => {
@@ -23,7 +26,12 @@ export const CalendarDay = ({
   };
   return (
     <button
-      className="flex h-[60px] flex-col items-center gap-4 rounded-4 text-center hover:bg-[#444444]"
+      className={classNames(
+        "flex h-[60px] flex-col items-center gap-4 rounded-4 text-center hover:bg-[#444444]",
+        {
+          "bg-[#444444]": isSelected,
+        },
+      )}
       onClick={handleClickDate}
     >
       <span
