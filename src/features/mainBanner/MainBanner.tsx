@@ -33,7 +33,8 @@ const MainBanner = () => {
         <div className="font-semibold text-20 leading-[150%] ">
           오늘 {me?.name}님의
           <br />
-          네트워킹 지수는 <span className="text-[#84F44F]">{percentage}%</span>
+          네트워킹 지수는{" "}
+          <span className="text-[#84F44F]">{percentage || 0}%</span>
           에요
         </div>
       </div>
