@@ -1,4 +1,4 @@
-import useCount from "share/store/useCount";
+import useCount from "@/store/useCount";
 import toast from "react-hot-toast";
 
 export default function Home() {

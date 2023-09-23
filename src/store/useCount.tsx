@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 interface CountState {
@@ -6,7 +6,7 @@ interface CountState {
   increaseCount: () => void;
 }
 
-// example
+// Example
 const useCount = create<CountState>()(
   devtools((set) => ({
     count: 0,
