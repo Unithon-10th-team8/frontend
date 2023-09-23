@@ -1,5 +1,6 @@
 import { Calendar } from "@/components";
 import { useGetCalendarByContactId } from "@/fetchers";
+import classNames from "classnames";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -57,7 +58,7 @@ export const ContactDetailCalendar = () => {
       <div className="mt-4 px-20">
         <p className="pb-8 text-[15px]">{dateText}일</p>
         <ul className="flex flex-col gap-16">
-          {filteredData?.map(({ is_important, name, id }) => (
+          {filteredData?.map(({ is_important, name, id, is_complete }) => (
             <li
               className="flex w-full items-center gap-10 rounded-12 bg-[#444444] px-16 py-[15px]"
               key={id}
@@ -67,7 +68,16 @@ export const ContactDetailCalendar = () => {
                   is_important ? "bg-accentGreen" : "bg-accentBlue"
                 }`}
               />
-              <div>{name || "[제목 없음]"}</div>
+              <div
+                className={classNames(
+                  "text-[15px] font-bold",
+                  is_complete ? "line-through" : "",
+                  is_complete ? "text-[#999]" : "text-white",
+                  is_complete ? "font-normal" : "font-bold",
+                )}
+              >
+                {name || "[제목 없음]"}
+              </div>
               {/* <div>{contents}</div> */}
             </li>
           ))}

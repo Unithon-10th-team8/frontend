@@ -1,6 +1,7 @@
 import { Calendar } from "@/components";
 import { CONTACT_DETAIL_IMAGE, ETC } from "@/constants";
-import { useGetAllCalendars } from "@/fetchers";
+import { useGetAllCalendars, useUpdateCalendarCompletion } from "@/fetchers";
+import classNames from "classnames";
 import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,7 +36,14 @@ function PageCalendar() {
 
   const { query } = useRouter();
 
-  const { data } = useGetAllCalendars();
+  const { data, mutate } = useGetAllCalendars();
+
+  const {
+    trigger,
+    isMutating,
+    error,
+    data: dataMutate,
+  } = useUpdateCalendarCompletion();
 
   // filter data that falls in to the range of start_dt and end_dt
   const filteredData = data?.filter(
@@ -46,9 +54,21 @@ function PageCalendar() {
         dayjs(end_dt).isAfter(initialDate, "day")),
   );
 
-  const handleComplete = () => {
+  const handleComplete = async (id: string) => {
     // TODO: 완료 api 호출
-    toast.success("일정을 완료 처리 했습니다.");
+
+    await toast.promise(
+      trigger({
+        id,
+      }),
+      {
+        loading: "처리 중...",
+        success: "완료 상태를 변경하였습니다. ",
+        error: "완료 상태 변경에 실패하였습니다. ",
+      },
+    );
+
+    mutate();
   };
   return (
     <div>
@@ -67,7 +87,7 @@ function PageCalendar() {
           </Link>
         </div>
         <ul className="flex flex-col gap-16">
-          {filteredData?.map(({ is_important, name, id }) => (
+          {filteredData?.map(({ is_important, name, id, is_complete }) => (
             <li
               className="flex w-full items-center gap-10 rounded-12 bg-[#444444] px-16 py-[15px]"
               key={id}
@@ -77,7 +97,16 @@ function PageCalendar() {
                   is_important ? "bg-accentGreen" : "bg-accentBlue"
                 }`}
               />
-              <div>{name || "[제목 없음]"}</div>
+              <div
+                className={classNames(
+                  "text-[15px] font-bold",
+                  is_complete ? "line-through" : "",
+                  is_complete ? "text-[#999]" : "text-white",
+                  is_complete ? "font-normal" : "font-bold",
+                )}
+              >
+                {name || "[제목 없음]"}
+              </div>
               <Link href="/calendar/edit" className="ml-auto">
                 <Image
                   width={20}
@@ -94,7 +123,7 @@ function PageCalendar() {
                 alt="완료하기"
                 unoptimized={false}
                 className="cursor-pointer"
-                onClick={handleComplete}
+                onClick={() => handleComplete(id)}
               />
             </li>
           ))}
