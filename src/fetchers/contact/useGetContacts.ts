@@ -1,5 +1,4 @@
-import { ContactOutput } from "@/api";
-import { APIClient } from "@/api/client";
+import { ContactOutput, APIClient } from "@/api";
 import useSWR from "swr";
 
 type FetcherKey = readonly [[string, string], number?, number?];

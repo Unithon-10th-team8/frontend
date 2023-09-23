@@ -1,4 +1,4 @@
-import { APIClient } from "@/api/client";
+import { APIClient } from "@/api";
 import useSWR from "swr";
 
 type FetcherKey = readonly [[string, string], string];

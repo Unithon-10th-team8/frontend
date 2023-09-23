@@ -1,4 +1,4 @@
-import { APIClient } from "@/api/client";
+import { APIClient } from "@/api";
 import useSWRMutation from "swr/mutation";
 
 type FetcherKey = readonly [[string, string]];

@@ -1,5 +1,4 @@
-import { CalendarOutput } from "@/api";
-import { APIClient } from "@/api/client";
+import { CalendarOutput, APIClient } from "@/api";
 import useSWR from "swr";
 
 type FetcherKey = readonly [[string, string], string, string];
