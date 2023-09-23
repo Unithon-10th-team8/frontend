@@ -1,5 +1,5 @@
 import { CalendarOutput } from "@/api";
-import { CONTACT_IMAGES, NOTIFICATION_IMAGES } from "@/constants";
+import { CONTACT_IMAGES, ETC } from "@/constants";
 import { useGetContactById } from "@/fetchers";
 
 import Image from "next/image";
@@ -30,8 +30,8 @@ const NotificationBelt = ({ filteredData }: Props) => {
         <div className="relative mr-[9px] h-[48px] w-[48px] rounded-[50%] bg-[#508BFF]">
           <Image
             className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"
-            src={NOTIFICATION_IMAGES.contract}
-            alt="약속"
+            src={ETC.bell}
+            alt="notification"
             unoptimized
             width={32}
             height={32}
