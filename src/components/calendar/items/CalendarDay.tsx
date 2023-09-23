@@ -7,6 +7,7 @@ type Props = {
   isCurrentMonth: boolean;
   hasPlainEvent: boolean;
   hasImportantEvent: boolean;
+  onClickDate?: (date: Dayjs) => void;
 };
 
 export const CalendarDay = ({
@@ -14,11 +15,17 @@ export const CalendarDay = ({
   isCurrentMonth,
   hasPlainEvent,
   hasImportantEvent,
+  onClickDate,
 }: Props) => {
   const dayText = date.format("D");
-
+  const handleClickDate = () => {
+    onClickDate?.(date);
+  };
   return (
-    <div className="flex h-[60px] flex-col items-center gap-4 text-center">
+    <button
+      className="flex h-[60px] flex-col items-center gap-4 rounded-4 text-center hover:bg-[#444444]"
+      onClick={handleClickDate}
+    >
       <span
         className={classnames({
           "text-[#565656]": !isCurrentMonth,
@@ -29,6 +36,6 @@ export const CalendarDay = ({
       </span>
       {hasImportantEvent && <CalendarMarkerEvent className="bg-accentGreen" />}
       {hasPlainEvent && <CalendarMarkerEvent className="bg-accentBlue" />}
-    </div>
+    </button>
   );
 };

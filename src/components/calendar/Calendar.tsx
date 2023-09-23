@@ -4,14 +4,15 @@ import { IconCalendarChevronLeft } from "@/components/calendar/items/IconCalenda
 import { IconCalendarChevronRight } from "@/components/calendar/items/IconCalendarChevronRight";
 import { generateCalendarDataFromApiData } from "@/components/calendar/modules/generateCalendarDataFromApiData";
 import { getCalendarDays } from "@/components/calendar/modules/getCalendarDays";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { useState } from "react";
 
 type Props = {
   data?: any;
+  onClickDate?: (date: Dayjs) => void;
 };
 
-export const Calendar = ({ data }: Props) => {
+export const Calendar = ({ data, onClickDate }: Props) => {
   const [initialDate, setInitialDate] = useState(dayjs());
   const calendarDate = generateCalendarDataFromApiData(data);
 
@@ -66,6 +67,7 @@ export const Calendar = ({ data }: Props) => {
               isCurrentMonth={isCurrentMonth}
               hasPlainEvent={eventData?.hasPlainEvent}
               hasImportantEvent={eventData?.hasImportantEvent}
+              onClickDate={onClickDate}
             />
           );
         })}
