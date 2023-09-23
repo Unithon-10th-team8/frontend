@@ -20,6 +20,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { ContactDetailCalendar } from "@/features/contactDetail/ContactDetailCalendar";
 import { InputGroup, TextButton } from "@/components";
+import dayjs from "dayjs";
 
 type Props = {
   profile?: ContactInput;
@@ -48,6 +49,7 @@ export const ContactDetail = ({ profile }: Props) => {
     !isValid || isLoadingCloudflareImages || isLoadingUploadImage;
 
   const handleSave = handleSubmit(async (values) => {
+    values.repeat_base_date = dayjs().toISOString();
     try {
       const fetcherPromise =
         isEditMode && contactId
