@@ -14,6 +14,15 @@ const NOTIFICATION_IMAGES = {
   meeting: "/notification/meeting.svg",
 };
 
+const CONTACT_IMAGES = {
+  iconChevronDown: "/contacts/icon-chevron-down.svg",
+  iconChevronLeft: "/contacts/icon-chevron-left.svg",
+  iconContactMenuMore: "/contacts/icon-contact-menu-more.svg",
+  iconContactSearch: "/contacts/icon-contact-search.svg",
+  iconContactAdd: "/contacts/icon-contact-add.svg",
+  iconContactBookmark: "/contacts/icon-contact-bookmark.svg",
+};
+
 const COMMON_IMAGES = {};
 
 type ImageObj<T extends string | number> = Record<
@@ -40,8 +49,9 @@ const addPathToImageObjects = () =>
     /* image url objects */
     COMMON_IMAGES,
     NOTIFICATION_IMAGES,
+    CONTACT_IMAGES,
   ].forEach(traverseObject);
 
 addPathToImageObjects();
 
-export { COMMON_IMAGES, NOTIFICATION_IMAGES };
+export { COMMON_IMAGES, CONTACT_IMAGES, NOTIFICATION_IMAGES };
