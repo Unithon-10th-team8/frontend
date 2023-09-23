@@ -3,11 +3,11 @@ import { APIClient } from "@/api/client";
 import useSWRMutation from "swr/mutation";
 
 type FetcherKey = readonly [[string, string]];
-type FetcherArg = { arg: { calendarId: string; isDomplate: boolean } };
+type FetcherArg = { calendarId: string; isDomplate: boolean };
 
 const fetcher = async (
   _: FetcherKey,
-  { arg: { calendarId, isDomplate } }: FetcherArg,
+  { arg: { calendarId, isDomplate } }: { arg: FetcherArg },
 ) => {
   const result =
     await APIClient.Calendar.updateCalendarCompletionV1CalendarsCalendarIdCompletionPost(
@@ -18,7 +18,7 @@ const fetcher = async (
 };
 
 export const useUpdateCalendarCompletion = () =>
-  useSWRMutation<CalendarOutput, any, FetcherKey>(
+  useSWRMutation<CalendarOutput, any, FetcherKey, FetcherArg>(
     [["POST", "/v1/calendars/{calendar_id}/completion"]],
     fetcher,
   );

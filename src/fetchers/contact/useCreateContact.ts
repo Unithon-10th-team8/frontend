@@ -3,15 +3,18 @@ import { APIClient } from "@/api/client";
 import useSWRMutation from "swr/mutation";
 
 type FetcherKey = readonly [[string, string]];
-type FetcherArg = { arg: ContactInput };
+type FetcherArg = ContactInput;
 
-const fetcher = async (_: FetcherKey, { arg: contact }: FetcherArg) => {
+const fetcher = async (
+  _: FetcherKey,
+  { arg: contact }: { arg: FetcherArg },
+) => {
   const result = await APIClient.Contact.createContactV1ContactsPost(contact);
   return result.data;
 };
 
 export const useCreateContact = () =>
-  useSWRMutation<ContactOutput, any, FetcherKey>(
+  useSWRMutation<ContactOutput, any, FetcherKey, FetcherArg>(
     [["POST", "/v1/contacts"]],
     fetcher,
   );

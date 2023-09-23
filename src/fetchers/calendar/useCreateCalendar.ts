@@ -3,11 +3,11 @@ import { APIClient } from "@/api/client";
 import useSWRMutation from "swr/mutation";
 
 type FetcherKey = readonly [[string, string]];
-type FetcherArg = { arg: { contactId: string; calendar: CalendarInput } };
+type FetcherArg = { contactId: string; calendar: CalendarInput };
 
 const fetcher = async (
   _: FetcherKey,
-  { arg: { contactId, calendar } }: FetcherArg,
+  { arg: { contactId, calendar } }: { arg: FetcherArg },
 ) => {
   const result =
     await APIClient.Calendar.createCalendarV1ContactsContactIdCalendarsPost(
@@ -18,7 +18,7 @@ const fetcher = async (
 };
 
 export const useCreateCalendar = () =>
-  useSWRMutation<CalendarOutput, any, FetcherKey>(
+  useSWRMutation<CalendarOutput, any, FetcherKey, FetcherArg>(
     [["POST", "/v1/contacts/{contact_id}/calendars"]],
     fetcher,
   );

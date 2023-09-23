@@ -4,12 +4,14 @@ import useSWRMutation from "swr/mutation";
 
 type FetcherKey = readonly [[string, string]];
 type FetcherArg = {
-  arg: { contactId: string; calendarId: string; calendar: CalendarInput };
+  contactId: string;
+  calendarId: string;
+  calendar: CalendarInput;
 };
 
 const fetcher = async (
   _: FetcherKey,
-  { arg: { contactId, calendarId, calendar } }: FetcherArg,
+  { arg: { contactId, calendarId, calendar } }: { arg: FetcherArg },
 ) => {
   const result =
     await APIClient.Calendar.updateCalendarV1ContactsContactIdCalendarsCalendarIdPost(
@@ -22,7 +24,7 @@ const fetcher = async (
 };
 
 export const useUpdateCalendar = () =>
-  useSWRMutation<CalendarOutput, any, FetcherKey>(
+  useSWRMutation<CalendarOutput, any, FetcherKey, FetcherArg>(
     [["POST", "/v1/contacts/{contact_id}/calendars/{calendar_id}"]],
     fetcher,
   );

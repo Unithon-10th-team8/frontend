@@ -3,9 +3,12 @@ import { APIClient } from "@/api/client";
 import useSWRMutation from "swr/mutation";
 
 type FetcherKey = readonly [[string, string]];
-type FetcherArg = { arg: { id: string; contact: ContactInput } };
+type FetcherArg = { id: string; contact: ContactInput };
 
-const fetcher = async (_: FetcherKey, { arg: { id, contact } }: FetcherArg) => {
+const fetcher = async (
+  _: FetcherKey,
+  { arg: { id, contact } }: { arg: FetcherArg },
+) => {
   const result = await APIClient.Contact.updateContactV1ContactsContactIdPost(
     id,
     contact,
@@ -14,7 +17,7 @@ const fetcher = async (_: FetcherKey, { arg: { id, contact } }: FetcherArg) => {
 };
 
 export const useUpdateContact = () =>
-  useSWRMutation<ContactOutput, any, FetcherKey>(
+  useSWRMutation<ContactOutput, any, FetcherKey, FetcherArg>(
     [["POST", "/v1/contacts/{contact_id}"]],
     fetcher,
   );
