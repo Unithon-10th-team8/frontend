@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import 'react-circular-progressbar/dist/styles.css';
 import { SWRConfig } from "swr";
 import type { AppProps } from "next/app";
 import { AppLayout, ToastProvider } from "@/components";
