@@ -10,6 +10,7 @@ export const Calendar = () => {
 
   const days = getCalendarDays(initialDate);
   const monthText = initialDate.format("MMM");
+  const yearText = initialDate.format("YYYY");
 
   const handleClickPreviousMonth = () => {
     setInitialDate(initialDate.subtract(1, "month"));
@@ -20,7 +21,10 @@ export const Calendar = () => {
   };
 
   return (
-    <div className="px-20">
+    <div className="relative px-20">
+      <p className="absolute left-[35px] top-4 block font-medium">
+        {yearText}년
+      </p>
       <div className="mb-24 mt-[14px] flex  items-center justify-center gap-8 ">
         <button onClick={handleClickPreviousMonth}>
           <IconCalendarChevronLeft />
