@@ -12,6 +12,7 @@ const CONTACT_IMAGES = {
   iconContactMenuMore: "/contacts/icon-contact-menu-more.svg",
   iconContactSearch: "/contacts/icon-contact-search.svg",
   iconContactAdd: "/contacts/icon-contact-add.svg",
+  iconContactBookmark: "/contacts/icon-contact-bookmark.svg",
 };
 
 const COMMON_IMAGES = {};
