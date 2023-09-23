@@ -23,7 +23,7 @@ export default function Home() {
   );
   return (
     <>
-      {filteredData &&
+      {filteredData?.length &&
         filteredData.map((data) => (
           <NotificationBelt filteredData={data} key={data.id} />
         ))}

@@ -113,6 +113,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
           onClick={back}
           width={20}
           height={20}
+          className="cursor-pointer "
         />
       </div>
       {/* 일정 제목 */}

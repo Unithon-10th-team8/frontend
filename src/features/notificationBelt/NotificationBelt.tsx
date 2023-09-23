@@ -12,6 +12,7 @@ interface Props {
 const NotificationBelt = ({ filteredData }: Props) => {
   const { data: contact } = useGetContactById(filteredData.contact_id || "");
 
+  if (filteredData?.is_complete) return <></>;
   return (
     <div className="flex h-[64px] w-full cursor-pointer items-center justify-between bg-[#5F95FF] px-[20px] py-[8px]">
       <div className="flex flex-col">
@@ -22,7 +23,7 @@ const NotificationBelt = ({ filteredData }: Props) => {
           </span>
           님과의 약속날 입니다!
         </span>
-        <span className=" pt-4 text-[12px] leading-[18px] text-[#fff] ">
+        <span className=" pt-4 text-[12px] leading-[18px] text-[#fff]">
           {filteredData.name}
         </span>
       </div>
