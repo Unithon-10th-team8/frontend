@@ -1,8 +1,11 @@
 import { Input, InputGroup, InputGroupDivider, TextButton } from "@/components";
+import { API_HOST } from "@/constants";
+import { UserOutput } from "@/fetchers/user";
+import Link from "next/link";
 import { Controller, useFormContext } from "react-hook-form";
 
 export const MyPageDefaultFormItems = () => {
-  const { control } = useFormContext<any>();
+  const { control } = useFormContext<UserOutput>();
 
   return (
     <>
@@ -14,55 +17,49 @@ export const MyPageDefaultFormItems = () => {
       <InputGroup>
         <Controller
           control={control}
-          name="affiliation"
+          name="email"
           render={({ field }) => (
-            <Input {...field} variant="start" placeholder="소속" />
-          )}
-        />
-        <InputGroupDivider />
-        <Controller
-          control={control}
-          name="rank"
-          render={({ field }) => (
-            <Input {...field} variant="end" placeholder="직급" />
+            <Input {...field} variant="end" placeholder="이메일" />
           )}
         />
       </InputGroup>
       <InputGroup>
-        <TextButton
-          variant="danger"
-          className="w-full !justify-start px-16 py-[15px] !text-[15px] !font-[400]"
-          icon={
-            <svg
-              width="21"
-              height="21"
-              viewBox="0 0 21 21"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6.77777 13.5554C6.77777 15.9514 6.77777 17.1502 7.52248 17.8941C8.26634 18.6388 9.46516 18.6388 11.8611 18.6388H12.7083C15.1043 18.6388 16.3031 18.6388 17.047 17.8941C17.7917 17.1502 17.7917 15.9514 17.7917 13.5554V6.77767C17.7917 4.38172 17.7917 3.18291 17.047 2.43904C16.3031 1.69434 15.1043 1.69434 12.7083 1.69434H11.8611C9.46516 1.69434 8.26634 1.69434 7.52248 2.43904C6.77777 3.18291 6.77777 4.38172 6.77777 6.77767"
-                stroke="#FD5252"
-                strokeWidth="1.27083"
-                strokeLinecap="round"
-              />
-              <path
-                d="M6.77777 16.5208C4.78086 16.5208 3.78199 16.5208 3.16182 15.9007C2.54166 15.2797 2.54166 14.2816 2.54166 12.2847V8.04861C2.54166 6.05171 2.54166 5.05283 3.16182 4.43267C3.78199 3.8125 4.78086 3.8125 6.77777 3.8125"
-                stroke="#FD5252"
-                strokeWidth="1.27083"
-              />
-              <path
-                d="M5.08334 10.1669H12.7083M12.7083 10.1669L10.5903 12.2849M12.7083 10.1669L10.5903 8.04883"
-                stroke="#FD5252"
-                strokeWidth="1.27083"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          }
-        >
-          로그아웃
-        </TextButton>
+        <Link href={`${API_HOST}/v1/users/logout`}>
+          <TextButton
+            variant="danger"
+            className="w-full !justify-start px-16 py-[15px] !text-[15px] !font-[400]"
+            icon={
+              <svg
+                width="21"
+                height="21"
+                viewBox="0 0 21 21"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.77777 13.5554C6.77777 15.9514 6.77777 17.1502 7.52248 17.8941C8.26634 18.6388 9.46516 18.6388 11.8611 18.6388H12.7083C15.1043 18.6388 16.3031 18.6388 17.047 17.8941C17.7917 17.1502 17.7917 15.9514 17.7917 13.5554V6.77767C17.7917 4.38172 17.7917 3.18291 17.047 2.43904C16.3031 1.69434 15.1043 1.69434 12.7083 1.69434H11.8611C9.46516 1.69434 8.26634 1.69434 7.52248 2.43904C6.77777 3.18291 6.77777 4.38172 6.77777 6.77767"
+                  stroke="#FD5252"
+                  strokeWidth="1.27083"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M6.77777 16.5208C4.78086 16.5208 3.78199 16.5208 3.16182 15.9007C2.54166 15.2797 2.54166 14.2816 2.54166 12.2847V8.04861C2.54166 6.05171 2.54166 5.05283 3.16182 4.43267C3.78199 3.8125 4.78086 3.8125 6.77777 3.8125"
+                  stroke="#FD5252"
+                  strokeWidth="1.27083"
+                />
+                <path
+                  d="M5.08334 10.1669H12.7083M12.7083 10.1669L10.5903 12.2849M12.7083 10.1669L10.5903 8.04883"
+                  stroke="#FD5252"
+                  strokeWidth="1.27083"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            }
+          >
+            로그아웃
+          </TextButton>
+        </Link>
         <InputGroupDivider />
         <TextButton
           variant="danger"

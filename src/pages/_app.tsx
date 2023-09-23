@@ -5,17 +5,18 @@ import type { AppProps } from "next/app";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import { AppLayout, Navbar, ToastProvider } from "@/components";
-import useSignIn from "@/store/useSignIn";
+import { useRouter } from "next/router";
 
 dayjs.locale("ko");
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { isSignedIn } = useSignIn();
+  const router = useRouter();
+
   return (
     <SWRConfig>
       <AppLayout>
         <Component {...pageProps} />
-        {isSignedIn && <Navbar />}
+        {!router.pathname.startsWith("/signIn") && <Navbar />}
       </AppLayout>
       <ToastProvider />
     </SWRConfig>
