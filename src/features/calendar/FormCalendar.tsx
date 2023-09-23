@@ -10,6 +10,7 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const 카테고리 = ["경조사", "미팅", "식사", "계약"];
 
@@ -26,6 +27,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
     tags: [],
   });
   const { trigger, isMutating, error } = useCreateCalendar();
+  const router = useRouter();
 
   const calendarId = query.calendarId as string;
 
@@ -43,7 +45,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
     isImportant: false,
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const apiFormValues = {
       name: formValues.title,
       start_dt: dayjs(formValues.startDate).toISOString(),
@@ -64,10 +66,22 @@ export const FormCalendar = ({ isEditMode }: Props) => {
         frequency: "일",
       },
     };
-    trigger({
-      contactId: user.id,
-      calendar: apiFormValues as any,
-    });
+
+    await toast.promise(
+      trigger({
+        contactId: user.id,
+        calendar: apiFormValues as any,
+      }),
+      {
+        loading: "일정을 생성하는 중...",
+        success: "일정이 생성되었습니다!",
+        error: "일정 생성을 실패했습니다.",
+      },
+    );
+
+    mutate();
+
+    router.push("/calendar");
   };
 
   useEffect(() => {
