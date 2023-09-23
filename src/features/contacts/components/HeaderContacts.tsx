@@ -3,9 +3,13 @@ import { HeaderCategorySelector } from "@/features/contacts/components/header/He
 import { HeaderSearchContactButton } from "@/features/contacts/components/header/HeaderSearchContactButton";
 import { HeaderSearchInput } from "@/features/contacts/components/header/HeaderSearchInput";
 import { HeaderShowMoreButton } from "@/features/contacts/components/header/HeaderShowMoreButton";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
-export const HeaderContacts = () => {
+type Props = {
+  setSearchQuery: Dispatch<SetStateAction<string>>;
+};
+
+export const HeaderContacts = ({ setSearchQuery }: Props) => {
   const [isSearchMode, setIsSearchMode] = useState(false);
 
   return (
@@ -17,7 +21,7 @@ export const HeaderContacts = () => {
         }`}
       >
         <HeaderAddContactButton className={isSearchMode ? "hidden" : ""} />
-        {isSearchMode && <HeaderSearchInput />}
+        {isSearchMode && <HeaderSearchInput setSearchQuery={setSearchQuery} />}
         <HeaderSearchContactButton setIsSearchMode={setIsSearchMode} />
         <HeaderShowMoreButton />
       </div>
