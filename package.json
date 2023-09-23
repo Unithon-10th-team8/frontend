@@ -22,6 +22,7 @@
     "dayjs": "^1.11.10",
     "eslint-config-next": "13.5.2",
     "next": "13.5.2",
+    "nookies": "^2.5.2",
     "postcss": "8.4.30",
     "preact": "^10.17.1",
     "react": "18.2.0",
