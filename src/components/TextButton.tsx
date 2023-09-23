@@ -1,10 +1,11 @@
 import classNames from "classnames";
-import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
+import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
 
-export type TextButtonVariant = "primary" | "secondary" | "muted";
+export type TextButtonVariant = "primary" | "secondary" | "muted" | "danger";
 
 export type TextButtonProps = {
   variant?: TextButtonVariant;
+  icon?: ReactNode;
 } & DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
@@ -16,6 +17,7 @@ const textButtonVariantStyleMap: Record<TextButtonVariant, string> = {
   primary: classNames("text-primary text-20"),
   secondary: classNames("text-white text-20"),
   muted: classNames("text-muted text-[15px] !font-[500]"),
+  danger: classNames("text-[#FD5252] text-20"),
 };
 const textButtonDisabledStyleClassName = "!text-muted cursor-not-allowed";
 
@@ -24,6 +26,7 @@ export const TextButton = ({
   className,
   children,
   disabled,
+  icon,
   ...props
 }: TextButtonProps) => {
   return (
@@ -36,6 +39,7 @@ export const TextButton = ({
         className,
       )}
     >
+      {icon}
       {children}
     </button>
   );

@@ -1,6 +1,6 @@
 import { TextButton } from "@/components";
 import { useWatch } from "react-hook-form";
-import { Profile } from "./validationSchema";
+import { Profile } from "@/constants";
 import Link from "next/link";
 
 export type ContactDetailViewHeaderProps = {};
