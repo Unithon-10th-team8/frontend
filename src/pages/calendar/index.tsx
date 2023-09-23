@@ -1,9 +1,11 @@
 import { Calendar } from "@/components";
 import { MOCKUP_CALENDAR_DATA } from "@/components/calendar/mockup/MockupCalendar";
 import { CONTACT_DETAIL_IMAGE, ETC } from "@/constants";
+import { useGetAllCalendars, useGetCalendarByContactId } from "@/fetchers";
 import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -32,6 +34,19 @@ function PageCalendar() {
   const [initialDate, setInitialDate] = useState(dayjs());
   const dateText = initialDate.format("D");
 
+  const { query } = useRouter();
+
+  const { data } = useGetAllCalendars();
+
+  // filter data that falls in to the range of start_dt and end_dt
+  const filteredData = data?.filter(
+    ({ start_dt, end_dt }) =>
+      dayjs(start_dt).isSame(initialDate, "day") ||
+      dayjs(end_dt).isSame(initialDate, "day") ||
+      (dayjs(start_dt).isBefore(initialDate, "day") &&
+        dayjs(end_dt).isAfter(initialDate, "day")),
+  );
+
   const handleComplete = () => {
     // TODO: 완료 api 호출
     toast.success("일정을 완료 처리 했습니다.");
@@ -39,13 +54,13 @@ function PageCalendar() {
   return (
     <div>
       <Calendar
-        data={MOCKUP_CALENDAR_DATA}
+        data={data}
         onClickDate={(date) => {
           setInitialDate(date);
         }}
         initialDate={initialDate}
       />
-      <div className="px-20 mt-4">
+      <div className="mt-4 px-20">
         <div className="mb-14 mt-[30px] flex justify-between text-[15px]">
           <p className="">{dateText}일</p>
           <Link href="/calendar/add">
@@ -53,14 +68,17 @@ function PageCalendar() {
           </Link>
         </div>
         <ul className="flex flex-col gap-16">
-          {contacts.map(({ bgColor, schedule, contents, id }) => (
+          {filteredData?.map(({ is_important, name, contents, id }) => (
             <li
               className="flex w-full items-center gap-10 rounded-12 bg-[#444444] px-16 py-[15px]"
               key={id}
             >
-              <div className={`h-[9px] w-[9px] rounded-[50%] ${bgColor}`} />
-              <div>{schedule}</div>
-              <div>{contents}</div>
+              <div
+                className={`h-[9px] w-[9px] rounded-[50%] ${
+                  is_important ? "bg-accentGreen" : "bg-accentBlue"
+                }`}
+              />
+              <div>{name || "[제목 없음]"}</div>
               <Link href="/calendar/edit" className="ml-auto">
                 <Image
                   width={20}
