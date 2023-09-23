@@ -5,3 +5,4 @@ export * from "./TextButton";
 export * from "./Divider";
 export * from "./TextArea";
 export * from "./Switch";
+export * from "./navbar/Navbar";

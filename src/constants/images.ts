@@ -6,6 +6,22 @@ export const IMAGE_BASE_URL_MAP: Record<ReleaseEnv, string> = {
 };
 
 export const IMAGE_BASE_URL = IMAGE_BASE_URL_MAP[RELEASE_ENV];
+const NOTIFICATION_IMAGES = {
+  birthday: "/notification/birthday.svg",
+  contract: "/notification/contract.svg",
+  meal: "/notification/meal.svg",
+  obituary: "/notification/obituary.svg",
+  meeting: "/notification/meeting.svg",
+};
+
+const CONTACT_IMAGES = {
+  iconChevronDown: "/contacts/icon-chevron-down.svg",
+  iconChevronLeft: "/contacts/icon-chevron-left.svg",
+  iconContactMenuMore: "/contacts/icon-contact-menu-more.svg",
+  iconContactSearch: "/contacts/icon-contact-search.svg",
+  iconContactAdd: "/contacts/icon-contact-add.svg",
+  iconContactBookmark: "/contacts/icon-contact-bookmark.svg",
+};
 
 const COMMON_IMAGES = {};
 
@@ -38,8 +54,10 @@ const addPathToImageObjects = () =>
     /* image url objects */
     COMMON_IMAGES,
     CONTACT_DETAIL_IMAGE,
+    NOTIFICATION_IMAGES,
+    CONTACT_IMAGES,
   ].forEach(traverseObject);
 
 addPathToImageObjects();
 
-export { COMMON_IMAGES, CONTACT_DETAIL_IMAGE };
+export { COMMON_IMAGES, CONTACT_IMAGES, NOTIFICATION_IMAGES, CONTACT_DETAIL_IMAGE };
