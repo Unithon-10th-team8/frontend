@@ -1,4 +1,4 @@
-import { NOTIFICATION_IMAGES } from "@/constants";
+import { CONTACT_IMAGES, NOTIFICATION_IMAGES } from "@/constants";
 import Image from "next/image";
 import React from "react";
 
@@ -10,7 +10,7 @@ const notification_number = 2;
 
 const NotificationBelt = () => {
   return (
-    <div className="flex h-[64px] w-full items-center justify-between bg-[#5F95FF] px-[20px] py-[8px]">
+    <div className="flex h-[64px] w-full items-center justify-between bg-[#5F95FF] px-[20px] py-[8px] cursor-pointer">
       <span className="text-[15px] font-medium leading-[18px]">
         오늘은{" "}
         <span className="font-semibold text-[16px] leading-[18px]">
@@ -35,10 +35,10 @@ const NotificationBelt = () => {
           </div>
         </div>
         <Image
-          src={NOTIFICATION_IMAGES.birthday}
+          src={CONTACT_IMAGES.iconChevronDown}
           alt="chevron-down"
           unoptimized
-          width={16}
+          width={12}
           height={14}
         />
       </div>
