@@ -1,3 +1,4 @@
+import { DAY_NAMES } from "@/components/calendar/constants/dayNames";
 import { CalendarDay } from "@/components/calendar/items/CalendarDay";
 import { IconCalendarChevronLeft } from "@/components/calendar/items/IconCalendarChevronLeft";
 import { IconCalendarChevronRight } from "@/components/calendar/items/IconCalendarChevronRight";
@@ -25,7 +26,7 @@ export const Calendar = () => {
       <p className="absolute left-[35px] top-4 block font-medium">
         {yearText}년
       </p>
-      <div className="mb-24 mt-[14px] flex  items-center justify-center gap-8 ">
+      <div className="mb-[28px] mt-[14px] flex  items-center justify-center gap-8 ">
         <button onClick={handleClickPreviousMonth}>
           <IconCalendarChevronLeft />
         </button>
@@ -34,7 +35,17 @@ export const Calendar = () => {
           <IconCalendarChevronRight />
         </button>
       </div>
+
       <div className="grid grid-cols-7 gap-1">
+        {DAY_NAMES.map((dayName) => (
+          <p
+            key={dayName}
+            className="font-regular h-48 text-center text-14 text-[#6b6b6b]"
+          >
+            {dayName}
+          </p>
+        ))}
+
         {days.map((date) => {
           const isCurrentMonth = date.isSame(initialDate, "month");
 
