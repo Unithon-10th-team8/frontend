@@ -29,7 +29,7 @@ export const ContactItem = ({ id, name, tags }: Props) => {
           </div>
         </div>
       </div>
-      <ButtonContactBookmark isBookmarked contactId={1} />
+      <ButtonContactBookmark isBookmarked contactId={id} />
     </Link>
   );
 };
