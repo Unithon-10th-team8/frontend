@@ -168,7 +168,9 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       {/* 날짜 */}
       <div className="my-[16px] text-[15px] font-medium">날짜</div>
       <button
-        className="bg-surface mb-8 rounded-12 px-16 py-[15px] text-left text-[15px] text-[#696969] focus:outline-none"
+        className={`mb-8 rounded-12 bg-surface px-16 py-[15px] text-left text-[15px] ${
+          formValues.startDate ? "text-[#fff]" : "text-[#696969]"
+        } focus:outline-none`}
         onClick={() => setIsStartDateModalOpen(true)}
       >
         {formValues.startDate
@@ -186,7 +188,9 @@ export const FormCalendar = ({ isEditMode }: Props) => {
         }}
       />
       <button
-        className="bg-surface rounded-12 px-16 py-[15px] text-left text-[15px] text-[#696969] focus:outline-none"
+        className={`rounded-12 bg-surface px-16 py-[15px] text-left text-[15px] ${
+          formValues.endDate ? "text-[#fff]" : "text-[#696969]"
+        } focus:outline-none`}
         onClick={() => setIsEndDateModalOpen(true)}
       >
         {formValues.endDate
@@ -203,34 +207,12 @@ export const FormCalendar = ({ isEditMode }: Props) => {
           });
         }}
       />
-      {/* <div className="mb-[14px] mr-10 flex w-full items-center justify-between rounded-[12px] bg-[#353639] p-[15px]">
-        <input className="mb-16 mt-8 w-[60px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
-        년
-        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
-        월
-        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
-        일
-        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
-        시
-        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
-        분
-      </div>
-      <div className="mr-10 flex w-full items-center justify-between rounded-[12px] bg-[#353639] p-[15px]">
-        <input className="mb-16 mt-8 w-[60px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
-        년
-        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
-        월
-        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
-        일
-        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
-        시
-        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
-        분
-      </div> */}
       {/* 고객 */}
       <div className="my-[16px] text-[15px] font-medium">고객</div>
       <button
-        className="bg-surface rounded-12 px-16 py-[15px] text-left text-[15px] text-[#696969] focus:outline-none"
+        className={`rounded-12 bg-surface px-16 py-[15px] text-left text-[15px] ${
+          user.id !== "0" ? "text-[#fff]" : "text-[#696969]"
+        } focus:outline-none`}
         placeholder="기타 메모"
         value={formValues.memo}
         onClick={() => setOpen(true)}
@@ -285,7 +267,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
 
       {/* 완료하기 */}
       <button
-        className="bg-surface mb-[80px] mt-[40px] rounded-12 py-[15px] text-center text-[15px] text-[#fff] focus:outline-none"
+        className="mb-[80px] mt-[40px] rounded-12 bg-[#5F95FF] py-[15px] text-center text-[15px] text-[#fff] focus:outline-none"
         onClick={handleSubmit}
       >
         완료하기
