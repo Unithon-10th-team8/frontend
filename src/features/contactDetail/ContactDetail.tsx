@@ -1,0 +1,44 @@
+import { useState } from "react";
+import { ContactDetailDefaultFormItems } from "./ContactDetailDefaultFormItems";
+import { ContactDetailEditHeader } from "./ContactDetailEditHeader";
+import { ContactDetailOptionalFormItems } from "./ContactDetailOptionalFormItems";
+import { ContactDetailProfileImage } from "./ContactDetailProfileImage";
+import { ContactDetailShowMore } from "./ContactDetailShowMore";
+import { ContactDetailViewHeader } from "./ContactDetailViewHeader";
+import { FormProvider, useForm, useFormState } from "react-hook-form";
+import { Profile, contactDetailValidationSchema } from "./validationSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+type Props = {
+  profile?: Profile;
+};
+
+export const ContactDetail = ({ profile }: Props) => {
+  const [isShowOptional, setIsShowOptional] = useState(!!profile);
+
+  const formMethod = useForm<Profile>({
+    mode: "all",
+    defaultValues: profile,
+    resolver: zodResolver(contactDetailValidationSchema),
+  });
+  const { isValid } = useFormState({ control: formMethod.control });
+
+  return (
+    <FormProvider {...formMethod}>
+      <div className="flex h-full w-full flex-col gap-16 px-20">
+        {profile ? (
+          <ContactDetailViewHeader />
+        ) : (
+          <ContactDetailEditHeader disabledSave={!isValid} />
+        )}
+        <ContactDetailProfileImage isAllowEdit={!profile} />
+        <ContactDetailDefaultFormItems />
+        {isShowOptional ? (
+          <ContactDetailOptionalFormItems />
+        ) : (
+          <ContactDetailShowMore onClick={() => setIsShowOptional(true)} />
+        )}
+      </div>
+    </FormProvider>
+  );
+};

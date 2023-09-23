@@ -9,6 +9,11 @@ export const IMAGE_BASE_URL = IMAGE_BASE_URL_MAP[RELEASE_ENV];
 
 const COMMON_IMAGES = {};
 
+const CONTACT_DETAIL_IMAGE = {
+  profileDefault: "/contacts/detail/profile-default.svg",
+  editProfileIcon: "/contacts/detail/edit-profile-icon.svg",
+};
+
 type ImageObj<T extends string | number> = Record<
   T,
   Record<T, Record<T, T> | T> | T
@@ -32,8 +37,9 @@ const addPathToImageObjects = () =>
   [
     /* image url objects */
     COMMON_IMAGES,
+    CONTACT_DETAIL_IMAGE,
   ].forEach(traverseObject);
 
 addPathToImageObjects();
 
-export { COMMON_IMAGES };
+export { COMMON_IMAGES, CONTACT_DETAIL_IMAGE };
