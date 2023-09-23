@@ -43,6 +43,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
     tags: [] as string[],
     memo: "",
     isImportant: false,
+    remindInterval: 0,
   });
 
   const handleSubmit = async () => {
@@ -51,7 +52,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       start_dt: dayjs(formValues.startDate).toISOString(),
       end_dt: dayjs(formValues.endDate).toISOString(),
       is_all_day: true,
-      // remind_interval: 10,
+      remind_interval: formValues.remindInterval * 1440,
       is_important: formValues.isImportant,
 
       content: formValues.memo,
@@ -59,12 +60,13 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       // completed_at: "2023-09-23T14:23:32.341165Z",
       is_repeat: false,
       tags: formValues.tags,
-      recurring_input: {
-        start_dt: "2023-09-23T17:01:52.781655Z",
-        end_dt: "2023-09-23T17:01:52.781691Z",
-        interval: 6,
-        frequency: "일",
-      },
+      // recurring_input: {
+      //   start_dt: "2023-09-23T17:01:52.781655Z",
+      //   end_dt: "2023-10-31T17:01:52.781691Z",
+      //   interval: 6,
+      //   frequency: "일",
+      // },
+      is_repeat: formValues.remindInterval > 0 ? true : false,
     };
 
     await toast.promise(
@@ -93,6 +95,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
         tags: data.calendar.tags ?? [],
         memo: data.calendar.content ?? "",
         isImportant: data.calendar.is_important,
+        remindInterval: data.calendar.remind_interval,
       });
 
       setUser({
@@ -169,7 +172,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       {/* 날짜 */}
       <div className="my-[16px] text-[15px] font-medium">날짜</div>
       <button
-        className={`mb-8 rounded-12 bg-surface px-16 py-[15px] text-left text-[15px] ${
+        className={`bg-surface mb-8 rounded-12 px-16 py-[15px] text-left text-[15px] ${
           formValues.startDate ? "text-[#fff]" : "text-[#696969]"
         } focus:outline-none`}
         onClick={() => setIsStartDateModalOpen(true)}
@@ -189,7 +192,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
         }}
       />
       <button
-        className={`rounded-12 bg-surface px-16 py-[15px] text-left text-[15px] ${
+        className={`bg-surface rounded-12 px-16 py-[15px] text-left text-[15px] ${
           formValues.endDate ? "text-[#fff]" : "text-[#696969]"
         } focus:outline-none`}
         onClick={() => setIsEndDateModalOpen(true)}
@@ -208,10 +211,51 @@ export const FormCalendar = ({ isEditMode }: Props) => {
           });
         }}
       />
+      <div className="my-[16px] text-[15px] font-medium">리마인드</div>
+      <div className="self-center">
+        <input
+          min={1}
+          max={364}
+          type="number"
+          className="  mb-16 mr-12 mt-8 w-[60px] border-b-[2px] border-[#5E5E5E] bg-transparent text-center text-[23px] font-bold"
+          onChange={(e) => {
+            setFormValues({
+              ...formValues,
+              remindInterval: Number(e.target.value),
+            });
+          }}
+          value={formValues.remindInterval}
+        />
+        일 전에 알림받고 싶어요!
+      </div>
+      {/* <div className="mb-[14px] mr-10 flex w-full items-center justify-between rounded-[12px] bg-[#353639] p-[15px]">
+        <input className="mb-16 mt-8 w-[60px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
+        년
+        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
+        월
+        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
+        일
+        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
+        시
+        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
+        분
+      </div>
+      <div className="mr-10 flex w-full items-center justify-between rounded-[12px] bg-[#353639] p-[15px]">
+        <input className="mb-16 mt-8 w-[60px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
+        년
+        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
+        월
+        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
+        일
+        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
+        시
+        <input className="mb-16 mt-8 w-[30px] border-b-[2px] border-[#5E5E5E] bg-transparent text-right text-[23px] font-bold" />
+        분
+      </div> */}
       {/* 고객 */}
       <div className="my-[16px] text-[15px] font-medium">고객</div>
       <button
-        className={`rounded-12 bg-surface px-16 py-[15px] text-left text-[15px] ${
+        className={`bg-surface rounded-12 px-16 py-[15px] text-left text-[15px] ${
           user.id !== "0" ? "text-[#fff]" : "text-[#696969]"
         } focus:outline-none`}
         placeholder="기타 메모"
@@ -253,7 +297,6 @@ export const FormCalendar = ({ isEditMode }: Props) => {
           </div>
         ))}
       </div>
-
       {/* 메모 */}
       <div className="my-[16px] text-[15px] font-medium">메모</div>
       <TextArea
@@ -265,7 +308,6 @@ export const FormCalendar = ({ isEditMode }: Props) => {
           });
         }}
       />
-
       {/* 완료하기 */}
       <button
         className="mb-[80px] mt-[40px] rounded-12 bg-[#5F95FF] py-[15px] text-center text-[15px] text-[#fff] focus:outline-none"
