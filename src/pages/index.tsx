@@ -1,16 +1,15 @@
-import useCount from "@/store/useCount";
-import toast from "react-hot-toast";
+import MainBanner from "@/features/mainBanner/MainBanner";
+import NotificationBelt from "@/features/notificationBelt/NotificationBelt";
+import TodayContacts from "@/features/todayContacts/TodayContacts";
 
 export default function Home() {
-  const { increaseCount, count } = useCount();
-
   return (
-    <div className="text-white">
-      <div className="flex">
-        <button onClick={increaseCount}>카운트 증가</button>
+    <>
+      <NotificationBelt />
+      <div className="px-[20px] pb-[20px]">
+        <MainBanner />
+        <TodayContacts />
       </div>
-      {count}
-      <button onClick={() => toast.success("hello world")}>toast test</button>
-    </div>
+    </>
   );
 }

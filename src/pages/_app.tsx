@@ -1,9 +1,10 @@
 import "@/styles/globals.css";
+import 'react-circular-progressbar/dist/styles.css';
 import { SWRConfig } from "swr";
 import type { AppProps } from "next/app";
-import { AppLayout, ToastProvider } from "@/components";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
+import { AppLayout, Navbar, ToastProvider } from "@/components";
 
 dayjs.locale("ko");
 
@@ -12,6 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <SWRConfig>
       <AppLayout>
         <Component {...pageProps} />
+        <Navbar />
       </AppLayout>
       <ToastProvider />
     </SWRConfig>
