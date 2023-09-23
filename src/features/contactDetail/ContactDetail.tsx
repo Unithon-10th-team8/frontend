@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ContactDetailDefaultFormItems } from "./ContactDetailDefaultFormItems";
 import { ContactDetailEditHeader } from "./ContactDetailEditHeader";
 import { ContactDetailOptionalFormItems } from "./ContactDetailOptionalFormItems";
@@ -26,10 +26,9 @@ export const ContactDetail = ({ profile }: Props) => {
 
   const formMethod = useForm<ContactInput>({
     mode: "all",
-    defaultValues: profile,
     resolver: zodResolver(contactDetailValidationSchema),
   });
-  const { handleSubmit } = formMethod;
+  const { handleSubmit, setValue, trigger } = formMethod;
   const { isValid } = useFormState({ control: formMethod.control });
 
   const handleSave = handleSubmit(async (values) => {
@@ -42,6 +41,15 @@ export const ContactDetail = ({ profile }: Props) => {
       router.push("/contacts");
     } catch (e) {}
   });
+
+  useEffect(() => {
+    if (profile) {
+      Object.entries(profile).forEach(([key, value]) =>
+        setValue(key as any, value),
+      );
+      trigger();
+    }
+  }, [profile]);
 
   return (
     <FormProvider {...formMethod}>

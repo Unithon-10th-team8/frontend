@@ -1,16 +1,24 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { MyPageProfileImage } from "./MyPageProfileImage";
 import { MyPageDefaultFormItems } from "./MyPageDefaultFormItems";
+import { UserOutput, useGetUserMe } from "@/fetchers/user";
+import { useEffect } from "react";
 
 export const MyPage = () => {
-  const formMethod = useForm<any>({
+  const { data: user } = useGetUserMe();
+  const formMethod = useForm<UserOutput>({
     mode: "all",
-    defaultValues: {
-      name: "홍길동",
-      affiliation: "유니톤",
-      rank: "참가자",
-    },
   });
+  const { setValue, trigger } = formMethod;
+
+  useEffect(() => {
+    if (user) {
+      Object.entries(user).forEach(([key, value]) =>
+        setValue(key as any, value),
+      );
+      trigger();
+    }
+  }, [user]);
 
   return (
     <FormProvider {...formMethod}>
