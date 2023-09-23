@@ -66,7 +66,6 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       //   interval: 6,
       //   frequency: "일",
       // },
-      is_repeat: formValues.remindInterval > 0 ? true : false,
     };
 
     await toast.promise(
