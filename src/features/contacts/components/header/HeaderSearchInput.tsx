@@ -12,9 +12,9 @@ export const HeaderSearchInput = () => {
           <path
             d="M13 3.5L7 10L13 16.5"
             stroke="white"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </div>
