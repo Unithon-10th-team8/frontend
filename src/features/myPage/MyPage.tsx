@@ -1,10 +1,9 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { MyPageProfileImage } from "./MyPageProfileImage";
-import { Profile } from "@/constants";
 import { MyPageDefaultFormItems } from "./MyPageDefaultFormItems";
 
 export const MyPage = () => {
-  const formMethod = useForm<Profile>({
+  const formMethod = useForm<any>({
     mode: "all",
     defaultValues: {
       name: "홍길동",

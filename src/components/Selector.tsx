@@ -15,6 +15,7 @@ export const Selector = ({ items, className = "", onChange }: Props) => {
   useEffect(() => {
     onChange?.(items[0] || "직장");
     setValue(items[0] || "직장");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onChange]);
 
   return (
