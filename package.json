@@ -7,7 +7,8 @@
     "proxy": "local-ssl-proxy --config proxy.config.json --key localhost-key.pem --cert localhost.pem",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build-api": "openapi-generator-cli generate -i https://dev-api.haenu.dev/openapi.json -g typescript-axios -o ./src/api --skip-validate-spec"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
@@ -16,6 +17,7 @@
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.16",
+    "axios": "^1.5.0",
     "classnames": "^2.3.2",
     "eslint-config-next": "13.5.2",
     "next": "13.5.2",
@@ -33,6 +35,7 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.7.0",
     "@tailwindcss/forms": "^0.5.6",
     "@tailwindcss/typography": "^0.5.10",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
