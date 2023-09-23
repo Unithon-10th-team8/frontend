@@ -65,6 +65,7 @@ export const UserSelectModal = ({ isOpen, setIsOpen, setUser }: Props) => {
                         contact.organization ?? "",
                         contact.position ?? "",
                       ]}
+                      imageSrc={contact.profile_image_url}
                     />
                   ))}
                 </Dialog.Panel>
