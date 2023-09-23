@@ -27,6 +27,12 @@ module.exports = {
     transparent: "transparent",
     black: "#000",
     white: "#fff",
+    primary: "#5F95FF",
+    accentGreen: "#84F44F",
+    accentBlue: '#5F95FF',
+    muted: "#8C8C8C",
+    disabled: "#565656",
+    surface: "#353639",
     whiteAlpha: {
       50: "rgba(255,255,255,0.04)",
       100: "rgba(255,255,255,0.06)",
