@@ -3,5 +3,5 @@ type Props = {
 };
 
 export const CalendarMarkerEvent = ({ className = "" }: Props) => {
-  return <div className={`h-[8px] w-[17px] rounded-full ${className}`} />;
+  return <div className={`h-[6px] w-[17px] rounded-full ${className}`} />;
 };
