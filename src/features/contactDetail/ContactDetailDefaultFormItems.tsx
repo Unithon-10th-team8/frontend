@@ -4,7 +4,11 @@ import { FieldItem } from "@/components/FieldItem";
 import { removeNull } from "@/utils";
 import { Controller, useFormContext } from "react-hook-form";
 
-export const ContactDetailDefaultFormItems = () => {
+type Props = {
+  isAllowEdit?: boolean;
+};
+
+export const ContactDetailDefaultFormItems = ({ isAllowEdit }: Props) => {
   const { control } = useFormContext<ContactInput>();
 
   return (
@@ -13,7 +17,13 @@ export const ContactDetailDefaultFormItems = () => {
         control={control}
         name="name"
         render={({ field: { value, ...field } }) => (
-          <Input {...field} value={value} placeholder="이름" />
+          <Input
+            {...field}
+            value={value}
+            readOnly={!isAllowEdit}
+            className={isAllowEdit ? "" : "cursor-default"}
+            placeholder="이름"
+          />
         )}
       />
       <InputGroup>
@@ -24,6 +34,8 @@ export const ContactDetailDefaultFormItems = () => {
             <Input
               {...field}
               value={removeNull(value)}
+              readOnly={!isAllowEdit}
+              className={isAllowEdit ? "" : "cursor-default"}
               variant="start"
               placeholder="소속"
             />
@@ -37,6 +49,8 @@ export const ContactDetailDefaultFormItems = () => {
             <Input
               {...field}
               value={removeNull(value)}
+              readOnly={!isAllowEdit}
+              className={isAllowEdit ? "" : "cursor-default"}
               variant="end"
               placeholder="직급"
             />
@@ -51,6 +65,8 @@ export const ContactDetailDefaultFormItems = () => {
             <Input
               {...field}
               value={removeNull(value)}
+              readOnly={!isAllowEdit}
+              className={isAllowEdit ? "" : "cursor-default"}
               variant="start"
               placeholder="연락처"
             />
@@ -64,6 +80,8 @@ export const ContactDetailDefaultFormItems = () => {
             <Input
               {...field}
               value={removeNull(value)}
+              readOnly={!isAllowEdit}
+              className={isAllowEdit ? "" : "cursor-default"}
               variant="end"
               placeholder="이메일"
             />
@@ -75,10 +93,14 @@ export const ContactDetailDefaultFormItems = () => {
         name="category"
         render={({ field }) => (
           <FieldItem label="분류">
-            <Selector
-              onChange={field.onChange}
-              items={["직장", "거래처", "고객", "기타"]}
-            />
+            {isAllowEdit ? (
+              <Selector
+                onChange={field.onChange}
+                items={["직장", "거래처", "고객", "기타"]}
+              />
+            ) : (
+              <span className="font-bold">{field.value}</span>
+            )}
           </FieldItem>
         )}
       />

@@ -9,7 +9,11 @@ import { FormProvider, useForm, useFormState } from "react-hook-form";
 import { contactDetailValidationSchema } from "@/constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ContactInput } from "@/api";
-import { useCreateContact } from "@/fetchers";
+import {
+  useCreateContact,
+  useGetImageUploadURL,
+  useUploadImage,
+} from "@/fetchers";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { ContactDetailCalendar } from "@/features/contactDetail/ContactDetailCalendar";
@@ -20,6 +24,8 @@ type Props = {
 
 export const ContactDetail = ({ profile }: Props) => {
   const { trigger: createContact } = useCreateContact();
+  const { isMutating: isLoadingCloudflareImages } = useGetImageUploadURL();
+  const { isMutating: isLoadingUploadImage } = useUploadImage();
 
   const router = useRouter();
   const [isShowOptional, setIsShowOptional] = useState(!!profile);
@@ -30,6 +36,9 @@ export const ContactDetail = ({ profile }: Props) => {
   });
   const { handleSubmit, setValue, trigger } = formMethod;
   const { isValid } = useFormState({ control: formMethod.control });
+
+  const disabledSave =
+    !isValid || isLoadingCloudflareImages || isLoadingUploadImage;
 
   const handleSave = handleSubmit(async (values) => {
     try {
@@ -59,14 +68,14 @@ export const ContactDetail = ({ profile }: Props) => {
         ) : (
           <ContactDetailEditHeader
             onSave={handleSave}
-            disabledSave={!isValid}
+            disabledSave={disabledSave}
           />
         )}
         <ContactDetailProfileImage isAllowEdit={!profile} />
         <ContactDetailDefaultFormItems />
         <ContactDetailCalendar />
         {isShowOptional ? (
-          <ContactDetailOptionalFormItems />
+          <ContactDetailOptionalFormItems isAllowEdit={!profile} />
         ) : (
           <ContactDetailShowMore onClick={() => setIsShowOptional(true)} />
         )}
