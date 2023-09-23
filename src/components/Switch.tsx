@@ -24,7 +24,7 @@ export const Switch = ({ defaultValue, onChange, className }: SwitchProps) => {
       <div
         className={classNames(
           "h-20 w-[22px] rounded-full bg-primary duration-200",
-          enabled ? "translate-x-[100%] bg-primary" : "bg-[#565656]",
+          enabled ? "translate-x-[100%] bg-primary" : "!bg-[#565656]",
         )}
       ></div>
     </button>
