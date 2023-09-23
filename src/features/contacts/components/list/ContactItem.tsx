@@ -1,11 +1,17 @@
 import { ButtonContactBookmark } from "@/features/contacts/components/button/ButtonContactBookmark";
 import { TContactItem } from "@/features/contacts/type/TContactItem";
+import Link from "next/link";
 
 type Props = {} & TContactItem;
 
 export const ContactItem = ({ id, name, tags }: Props) => {
+  const contactDetailLink = `/contacts/${id}`;
+
   return (
-    <div className=" border-b-solid flex animate-fade-in items-center justify-between border-b-[1px] border-b-[#353639] pb-[15px] pl-[19px] pr-[20px] pt-[15px]">
+    <Link
+      href={contactDetailLink}
+      className=" border-b-solid flex animate-fade-in items-center justify-between border-b-[1px] border-b-[#353639] pb-[15px] pl-[19px] pr-[20px] pt-[15px]"
+    >
       {/* TODO: 이미지 태그로 대체 */}
       <div className="flex">
         <div className="h-[58px] w-[58px] rounded-full bg-[#444]" />
@@ -24,6 +30,6 @@ export const ContactItem = ({ id, name, tags }: Props) => {
         </div>
       </div>
       <ButtonContactBookmark isBookmarked contactId={1} />
-    </div>
+    </Link>
   );
 };
