@@ -8,10 +8,10 @@ import dayjs from "dayjs";
 import { useState } from "react";
 
 type Props = {
-  data: any;
+  data?: any;
 };
 
-export const Calendar = ({ data }: any) => {
+export const Calendar = ({ data }: Props) => {
   const [initialDate, setInitialDate] = useState(dayjs());
   const calendarDate = generateCalendarDataFromApiData(data);
 
