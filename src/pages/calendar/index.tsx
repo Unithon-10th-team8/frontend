@@ -9,27 +9,6 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-const contacts = [
-  {
-    id: 0,
-    bgColor: "bg-accentGreen",
-    schedule: "12:00 - 14:00",
-    contents: "외부 미팅",
-  },
-  {
-    id: 1,
-    bgColor: "bg-accentGreen",
-    schedule: "12:00 - 14:00",
-    contents: "식사",
-  },
-  {
-    id: 2,
-    bgColor: "bg-accentBlue",
-    schedule: "12:00 - 14:00",
-    contents: "계약날",
-  },
-];
-
 function PageCalendar() {
   const [initialDate, setInitialDate] = useState(dayjs());
   const dateText = initialDate.format("D");
@@ -82,7 +61,7 @@ function PageCalendar() {
         }}
         initialDate={initialDate}
       />
-      <div className="mt-4 px-20">
+      <div className="px-20 mt-4">
         <div className="mb-14 mt-[30px] flex justify-between text-[15px]">
           <p className="">{dateText}일</p>
           <Link href="/calendar/add">

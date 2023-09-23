@@ -1,5 +1,5 @@
 import { CalendarOutput } from "@/api";
-import { CONTACT_IMAGES, NOTIFICATION_IMAGES } from "@/constants";
+import { CONTACT_IMAGES, ETC } from "@/constants";
 import { useGetContactById } from "@/fetchers";
 
 import Image from "next/image";
@@ -12,6 +12,7 @@ interface Props {
 const NotificationBelt = ({ filteredData }: Props) => {
   const { data: contact } = useGetContactById(filteredData.contact_id || "");
 
+  if (filteredData?.is_complete) return <></>;
   return (
     <div className="flex h-[64px] w-full cursor-pointer items-center justify-between bg-[#5F95FF] px-[20px] py-[8px]">
       <div className="flex flex-col">
@@ -22,7 +23,7 @@ const NotificationBelt = ({ filteredData }: Props) => {
           </span>
           님과의 약속날 입니다!
         </span>
-        <span className=" pt-4 text-[12px] leading-[18px] text-[#fff] ">
+        <span className=" pt-4 text-[12px] leading-[18px] text-[#fff]">
           {filteredData.name}
         </span>
       </div>
@@ -30,8 +31,8 @@ const NotificationBelt = ({ filteredData }: Props) => {
         <div className="relative mr-[9px] h-[48px] w-[48px] rounded-[50%] bg-[#508BFF]">
           <Image
             className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"
-            src={NOTIFICATION_IMAGES.contract}
-            alt="약속"
+            src={ETC.bell}
+            alt="notification"
             unoptimized
             width={32}
             height={32}

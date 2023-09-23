@@ -116,6 +116,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
           onClick={back}
           width={20}
           height={20}
+          className="cursor-pointer "
         />
       </div>
       {/* 일정 제목 */}
@@ -171,7 +172,9 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       {/* 날짜 */}
       <div className="my-[16px] text-[15px] font-medium">날짜</div>
       <button
-        className="bg-surface mb-8 rounded-12 px-16 py-[15px] text-left text-[15px] text-[#696969] focus:outline-none"
+        className={`bg-surface mb-8 rounded-12 px-16 py-[15px] text-left text-[15px] ${
+          formValues.startDate ? "text-[#fff]" : "text-[#696969]"
+        } focus:outline-none`}
         onClick={() => setIsStartDateModalOpen(true)}
       >
         {formValues.startDate
@@ -189,7 +192,9 @@ export const FormCalendar = ({ isEditMode }: Props) => {
         }}
       />
       <button
-        className="bg-surface rounded-12 px-16 py-[15px] text-left text-[15px] text-[#696969] focus:outline-none"
+        className={`bg-surface rounded-12 px-16 py-[15px] text-left text-[15px] ${
+          formValues.endDate ? "text-[#fff]" : "text-[#696969]"
+        } focus:outline-none`}
         onClick={() => setIsEndDateModalOpen(true)}
       >
         {formValues.endDate
@@ -250,7 +255,9 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       {/* 고객 */}
       <div className="my-[16px] text-[15px] font-medium">고객</div>
       <button
-        className="bg-surface rounded-12 px-16 py-[15px] text-left text-[15px] text-[#696969] focus:outline-none"
+        className={`bg-surface rounded-12 px-16 py-[15px] text-left text-[15px] ${
+          user.id !== "0" ? "text-[#fff]" : "text-[#696969]"
+        } focus:outline-none`}
         placeholder="기타 메모"
         value={formValues.memo}
         onClick={() => setOpen(true)}
@@ -303,7 +310,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       />
       {/* 완료하기 */}
       <button
-        className="bg-surface mb-[80px] mt-[40px] rounded-12 py-[15px] text-center text-[15px] text-[#fff] focus:outline-none"
+        className="mb-[80px] mt-[40px] rounded-12 bg-[#5F95FF] py-[15px] text-center text-[15px] text-[#fff] focus:outline-none"
         onClick={handleSubmit}
       >
         완료하기
