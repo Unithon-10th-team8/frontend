@@ -10,13 +10,11 @@ type Props = {
 
 export const HeaderCategorySelector = ({ className = "" }: Props) => {
   return (
-    <div
-      className={`p-x-[4px] p-y-[2px] relative flex items-center ${className}`}
-    >
+    <div className={`relative flex items-center px-4 py-2 ${className}`}>
       <Menu>
         <Menu.Button>
-          <div className="p-x-[4px] p-y-[2px] flex items-center">
-            <span className="mr-[12px] text-[20px] font-bold">전체</span>
+          <div className="flex items-center px-4 py-2">
+            <span className="mr-12 text-20 font-bold">전체</span>
             <Image
               height={6}
               width={12}
@@ -25,16 +23,14 @@ export const HeaderCategorySelector = ({ className = "" }: Props) => {
             />
           </div>
         </Menu.Button>
-        <Menu.Items className="absolute top-[40px] z-[10] flex flex-col rounded-[8px] bg-[#444444] px-[10px]">
+        <Menu.Items className="absolute top-[40px] z-[10] flex flex-col rounded-8 bg-[#444444] px-[10px]">
           {HEADER_CATEGORY_LIST.map(({ label, value }, index) => {
             const isLastItem = index === HEADER_CATEGORY_LIST.length - 1;
             return (
               <Menu.Item key={index}>
                 {({ active }) => (
                   <>
-                    <span
-                      className={"w-[48px] py-[8px] text-center font-medium"}
-                    >
+                    <span className={"w-48 py-8 text-center font-medium"}>
                       {label}
                     </span>
                     {!isLastItem && <DividerSelector />}

@@ -37,7 +37,7 @@ export const HeaderSearchInput = ({
       </button>
       <input
         placeholder="찾고 싶은 분의 이름을 입력해봐요!"
-        className="h-[40px] flex-1 rounded-[12px] border-1 border-gray-700 bg-[#353639] px-16 py-[11px] placeholder:text-[#696969] focus:outline-none"
+        className="h-[40px] flex-1 rounded-12 border-1 border-gray-700 bg-[#353639] px-16 py-[11px] placeholder:text-[#696969] focus:outline-none"
         onChange={handleChangeInput}
       />
     </div>

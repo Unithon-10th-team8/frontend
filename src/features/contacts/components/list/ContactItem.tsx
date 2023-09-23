@@ -21,7 +21,7 @@ export const ContactItem = ({ id, name, tags }: Props) => {
             {tags.map((tag, index) => (
               <span
                 key={index}
-                className="mr-[4px] bg-[#353639] px-[7px] py-[3px] text-[12px] font-[400] text-[#666]"
+                className="mr-[4px] bg-[#353639] px-[7px] py-[3px] text-12 font-[400] text-[#666]"
               >
                 {tag}
               </span>

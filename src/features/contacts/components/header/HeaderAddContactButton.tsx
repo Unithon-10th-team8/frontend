@@ -12,7 +12,7 @@ export const HeaderAddContactButton = ({ className }: Props) => {
       width={20}
       alt="iconChevronDown"
       src={CONTACT_IMAGES.iconContactAdd}
-      className={`h-[20px] ${className}`}
+      className={`h-20 ${className}`}
     />
   );
 };

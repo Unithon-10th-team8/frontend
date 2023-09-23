@@ -14,7 +14,7 @@ export const HeaderSearchContactButton = ({ setIsSearchMode }: Props) => {
         width={12}
         alt="iconChevronDown"
         src={CONTACT_IMAGES.iconContactSearch}
-        className="h-[20px] w-[20px]"
+        className="h-20 w-20"
       />
     </button>
   );

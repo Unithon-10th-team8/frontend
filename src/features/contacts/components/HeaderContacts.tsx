@@ -13,10 +13,10 @@ export const HeaderContacts = ({ setSearchQuery }: Props) => {
   const [isSearchMode, setIsSearchMode] = useState(false);
 
   return (
-    <div className="flex h-[48px] items-center justify-between px-[20px] py-[4px]">
+    <div className="flex h-48 items-center justify-between px-20 py-4">
       <HeaderCategorySelector className={isSearchMode ? "hidden" : ""} />
       <div
-        className={`ml-[16px] flex items-center gap-[16px] ${
+        className={`ml-16 flex items-center gap-16 ${
           isSearchMode ? "flex-1" : ""
         }`}
       >

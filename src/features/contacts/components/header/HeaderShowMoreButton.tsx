@@ -8,7 +8,7 @@ export const HeaderShowMoreButton = () => {
       width={20}
       alt="iconChevronDown"
       src={CONTACT_IMAGES.iconContactMenuMore}
-      className="h-[20px]"
+      className="h-20"
     />
   );
 };
