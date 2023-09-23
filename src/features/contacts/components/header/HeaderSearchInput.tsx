@@ -1,6 +1,6 @@
 export const HeaderSearchInput = () => {
   return (
-    <div className="flex items-center">
+    <div className="flex flex-1 items-center">
       <div className="ml-[-16px] mr-[7px]">
         <svg
           width="20"
