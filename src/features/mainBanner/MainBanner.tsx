@@ -17,7 +17,7 @@ const MainBanner = () => {
       <div className="mr-[22px] h-[120px] w-[120px]">
         <CircularProgressbar
           value={percentage}
-          text={`${percentage}%`}
+          text={`${percentage || 0}%`}
           styles={buildStyles({
             pathColor: "#3468CB",
             textColor: "#fff",
