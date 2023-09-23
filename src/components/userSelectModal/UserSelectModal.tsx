@@ -1,6 +1,6 @@
 import { ContactItem } from "@/features/contacts/components/list/ContactItem";
-import { MOCKUP_CONTACT_LIST } from "@/features/contacts/mockups/MockupContactList";
 import { TContactItem } from "@/features/contacts/type/TContactItem";
+import { useGetContacts } from "@/fetchers";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
@@ -11,6 +11,7 @@ type Props = {
 };
 
 export const UserSelectModal = ({ isOpen, setIsOpen, setUser }: Props) => {
+  const { data } = useGetContacts({});
   function closeModal() {
     setIsOpen(false);
   }
@@ -54,12 +55,16 @@ export const UserSelectModal = ({ isOpen, setIsOpen, setUser }: Props) => {
                   >
                     사람 선택
                   </Dialog.Title>
-                  {MOCKUP_CONTACT_LIST.map((contact) => (
+                  {data?.map((contact) => (
                     <ContactItem
                       key={contact.id}
                       {...contact}
                       setUser={handleSetUser}
                       isSelectMode
+                      tags={[
+                        contact.organization ?? "",
+                        contact.position ?? "",
+                      ]}
                     />
                   ))}
                 </Dialog.Panel>
