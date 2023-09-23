@@ -27,12 +27,13 @@ export const CalendarDay = ({
   return (
     <button
       className={classNames(
-        "flex h-[60px] flex-col items-center gap-4 rounded-4 text-center hover:bg-[#444444]",
+        "flex h-[60px] flex-col items-center gap-4 rounded-4 text-center hover:bg-[#444444] disabled:bg-[transparent]",
         {
           "bg-[#444444]": isSelected,
         },
       )}
       onClick={handleClickDate}
+      disabled={!isCurrentMonth}
     >
       <span
         className={classnames({
