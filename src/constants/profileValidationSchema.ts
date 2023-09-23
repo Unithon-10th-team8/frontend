@@ -1,29 +1,18 @@
+import { ContactInput } from "@/api";
 import * as z from "zod";
 
-export type Profile = {
-  logo?: string;
-  name: string;
-  affiliation?: string;
-  rank?: string;
-  phone?: string;
-  email?: string;
-  isEnableAlarm?: boolean;
-  alarmMonth?: number;
-  alarmDay?: number;
-  memo?: string;
-};
-
 export const contactDetailValidationSchema: z.ZodObject<
-  Record<keyof Profile, z.ZodTypeAny>
+  Record<keyof ContactInput, z.ZodTypeAny>
 > = z.object({
-  logo: z.string().optional(),
-  name: z.string().nonempty(),
-  affiliation: z.string().optional(),
-  rank: z.string().optional(),
-  phone: z.string().optional(),
-  email: z.string().email().optional(),
-  isEnableAlarm: z.boolean().optional(),
-  alarmMonth: z.number().optional(),
-  alarmDay: z.number().optional(),
-  memo: z.string().optional(),
+  name: z.string(),
+  organization: z.string().nullish().optional(),
+  position: z.string().nullish().optional(),
+  phone: z.string().nullish().optional(),
+  email: z.string().nullish().optional(),
+  category: z.string(),
+  profile_image_url: z.string().nullish().optional(),
+  content: z.string().nullish().optional(),
+  is_important: z.boolean().optional(),
+  repeat_interval: z.string().nullish().optional(),
+  repeat_base_date: z.string().nullish().optional(),
 });
