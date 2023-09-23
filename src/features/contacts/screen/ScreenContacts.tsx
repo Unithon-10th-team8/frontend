@@ -8,11 +8,16 @@ export const ScreenContacts = () => {
 
   return (
     <>
-      <HeaderContacts
-        category={category}
-        setCategory={setCategory}
-        setSearchQuery={setSearchQuery}
-      />
+      <div className="w-full">
+        <div className="w-full border-b-1 border-[#353639] px-20 pb-16 pt-32">
+          <h1 className="animate-title text-[32px] font-bold">연락책</h1>
+        </div>
+        <HeaderContacts
+          category={category}
+          setCategory={setCategory}
+          setSearchQuery={setSearchQuery}
+        />
+      </div>
       <ContactsListContainer searchQuery={searchQuery} category={category} />
     </>
   );

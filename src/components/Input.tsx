@@ -11,8 +11,11 @@ export const Input = ({ className, variant, ...props }: InputProps) => {
   return (
     <input
       {...props}
+      autoComplete="off"
+      autoCapitalize="off"
+      autoCorrect="off"
       className={classNames(
-        "bg-surface rounded-12 px-16 py-[15px] text-[15px] text-white placeholder:text-[15px] placeholder:text-[#696969] focus:outline-none",
+        "rounded-12 bg-surface px-16 py-[15px] text-[15px] text-white placeholder:text-[15px] placeholder:text-[#696969] autofill:bg-surface hover:autofill:bg-surface focus:outline-none focus:autofill:bg-surface active:autofill:bg-surface",
         {
           "!rounded-b-none": variant === "start",
           "!rounded-t-none": variant === "end",
@@ -29,7 +32,7 @@ export type InputGroupProps = {
 
 export const InputGroup = ({ children }: InputGroupProps) => {
   return (
-    <div className="bg-surface flex w-full flex-col overflow-hidden rounded-12">
+    <div className="flex w-full flex-col overflow-hidden rounded-12 bg-surface">
       {children}
     </div>
   );

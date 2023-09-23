@@ -225,7 +225,7 @@ export interface CalendarOutput {
      * @type {}
      * @memberof CalendarOutput
      */
-    'tags':  | null;
+    'tags': string[] | null;
     /**
      * 
      * @type {string}

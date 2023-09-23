@@ -1,14 +1,44 @@
 import MainBanner from "@/features/mainBanner/MainBanner";
 import NotificationBelt from "@/features/notificationBelt/NotificationBelt";
 import TodayContacts from "@/features/todayContacts/TodayContacts";
+import { useGetUserMe } from "@/fetchers/user";
+import classNames from "classnames";
+
+import { useGetAllCalendars } from "@/fetchers";
+import dayjs from "dayjs";
+import { useState } from "react";
 
 export default function Home() {
+  const [initialDate] = useState(dayjs());
+  const { data: user } = useGetUserMe();
+
+  const { data: contactData } = useGetAllCalendars();
+
+  const filteredData = contactData?.filter(
+    ({ start_dt, end_dt }) =>
+      dayjs(start_dt).isSame(initialDate, "day") ||
+      dayjs(end_dt).isSame(initialDate, "day") ||
+      (dayjs(start_dt).isBefore(initialDate, "day") &&
+        dayjs(end_dt).isAfter(initialDate, "day")),
+  );
   return (
     <>
-      <NotificationBelt />
+      {filteredData &&
+        filteredData.map((data) => (
+          <NotificationBelt filteredData={data} key={data.id} />
+        ))}
       <div className="px-[20px] pb-[20px]">
+        <h1
+          className={classNames(
+            "animate-title mt-32 text-[32px] font-bold leading-[1.2]",
+          )}
+        >
+          반가워요 {user?.name}님,
+          <br />
+          활기찬 네트워킹되세요!
+        </h1>
         <MainBanner />
-        <TodayContacts />
+        <TodayContacts filteredData={filteredData} />
       </div>
     </>
   );

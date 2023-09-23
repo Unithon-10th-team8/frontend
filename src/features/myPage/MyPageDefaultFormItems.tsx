@@ -12,14 +12,27 @@ export const MyPageDefaultFormItems = () => {
       <Controller
         control={control}
         name="name"
-        render={({ field }) => <Input {...field} placeholder="이름" />}
+        render={({ field }) => (
+          <Input
+            {...field}
+            readOnly
+            className="cursor-default"
+            placeholder="이름"
+          />
+        )}
       />
       <InputGroup>
         <Controller
           control={control}
           name="email"
           render={({ field }) => (
-            <Input {...field} variant="end" placeholder="이메일" />
+            <Input
+              {...field}
+              readOnly
+              className="cursor-default"
+              variant="end"
+              placeholder="이메일"
+            />
           )}
         />
       </InputGroup>
