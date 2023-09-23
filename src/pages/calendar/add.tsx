@@ -16,7 +16,7 @@ const AddPage = () => {
   const { back } = useRouter();
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState<TContactItem>({
-    id: 0,
+    id: "0",
     name: "",
     tags: [],
   });
@@ -162,7 +162,7 @@ const AddPage = () => {
         placeholder="기타 메모"
         onClick={() => setOpen(true)}
       >
-        {user.id !== 0 ? user.name : "고객 선택"}
+        {user.id !== "0" ? user.name : "고객 선택"}
       </button>
       <UserSelectModal isOpen={open} setIsOpen={setOpen} setUser={setUser} />
       {/* 카테고리 */}
