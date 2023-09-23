@@ -5,7 +5,7 @@ type Props = {} & TContactItem;
 
 export const ContactItem = ({ id, name, tags }: Props) => {
   return (
-    <div className=" border-b-solid flex items-center justify-between border-b-[1px] border-b-[#353639] pb-[15px] pl-[19px] pr-[20px] pt-[15px]">
+    <div className=" border-b-solid flex animate-fade-in items-center justify-between border-b-[1px] border-b-[#353639] pb-[15px] pl-[19px] pr-[20px] pt-[15px]">
       {/* TODO: 이미지 태그로 대체 */}
       <div className="flex">
         <div className="h-[58px] w-[58px] rounded-full bg-[#444]" />
