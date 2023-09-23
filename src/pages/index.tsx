@@ -34,7 +34,7 @@ export default function Home() {
       <div className="px-[20px] pb-[20px]">
         <h1
           className={classNames(
-            "animate-title mt-32 text-[32px] font-bold leading-[1.2]",
+            "animate-title mt-32 text-[28px] font-bold leading-[1.2]",
           )}
         >
           {user?.name}님,

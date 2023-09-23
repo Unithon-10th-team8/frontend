@@ -3,9 +3,13 @@ import { useWatch } from "react-hook-form";
 import Link from "next/link";
 import { ContactInput } from "@/api";
 
-export type ContactDetailViewHeaderProps = {};
+export type ContactDetailViewHeaderProps = {
+  onClickEdit?: () => void;
+};
 
-export const ContactDetailViewHeader = ({}: ContactDetailViewHeaderProps) => {
+export const ContactDetailViewHeader = ({
+  onClickEdit,
+}: ContactDetailViewHeaderProps) => {
   const { name } = useWatch<ContactInput>();
 
   return (
@@ -32,6 +36,7 @@ export const ContactDetailViewHeader = ({}: ContactDetailViewHeaderProps) => {
           {name}
         </TextButton>
       </Link>
+      <TextButton onClick={onClickEdit}>수정</TextButton>
     </div>
   );
 };
