@@ -12,6 +12,7 @@ import { ContactInput } from "@/api";
 import { useCreateContact } from "@/fetchers";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { ContactDetailCalendar } from "@/features/contactDetail/ContactDetailCalendar";
 
 type Props = {
   profile?: ContactInput;
@@ -44,7 +45,7 @@ export const ContactDetail = ({ profile }: Props) => {
 
   return (
     <FormProvider {...formMethod}>
-      <div className="flex h-full w-full flex-col gap-16 px-20">
+      <div className="flex w-full flex-col gap-16 px-20">
         {profile ? (
           <ContactDetailViewHeader />
         ) : (
@@ -55,6 +56,7 @@ export const ContactDetail = ({ profile }: Props) => {
         )}
         <ContactDetailProfileImage isAllowEdit={!profile} />
         <ContactDetailDefaultFormItems />
+        <ContactDetailCalendar />
         {isShowOptional ? (
           <ContactDetailOptionalFormItems />
         ) : (

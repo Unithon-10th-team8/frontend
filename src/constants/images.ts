@@ -14,6 +14,10 @@ const NOTIFICATION_IMAGES = {
   meeting: "/notification/meeting.svg",
 };
 
+const SIGN_IN = {
+  google: "/signIn/google.svg",
+};
+
 const CONTACT_IMAGES = {
   iconChevronDown: "/contacts/icon-chevron-down.svg",
   iconChevronLeft: "/contacts/icon-chevron-left.svg",
@@ -56,8 +60,15 @@ const addPathToImageObjects = () =>
     CONTACT_DETAIL_IMAGE,
     NOTIFICATION_IMAGES,
     CONTACT_IMAGES,
+    SIGN_IN,
   ].forEach(traverseObject);
 
 addPathToImageObjects();
 
-export { COMMON_IMAGES, CONTACT_IMAGES, NOTIFICATION_IMAGES, CONTACT_DETAIL_IMAGE };
+export {
+  COMMON_IMAGES,
+  CONTACT_IMAGES,
+  NOTIFICATION_IMAGES,
+  CONTACT_DETAIL_IMAGE,
+  SIGN_IN,
+};
