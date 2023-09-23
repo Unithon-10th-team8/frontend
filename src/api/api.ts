@@ -39,6 +39,32 @@ export interface BodySocialLoginV1SocialLoginProviderPost {
 /**
  * 
  * @export
+ * @interface BodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost
+ */
+export interface BodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost
+     */
+    'is_complete': boolean;
+}
+/**
+ * 
+ * @export
+ * @interface BodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch
+ */
+export interface BodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch
+     */
+    'is_important': boolean;
+}
+/**
+ * 
+ * @export
  * @interface BodyUpdateUserV1UsersUserIdPost
  */
 export interface BodyUpdateUserV1UsersUserIdPost {
@@ -599,16 +625,17 @@ export const CalendarApiAxiosParamCreator = function (configuration?: Configurat
          * 유저의 모든 캘린더를 가져옵니다.
          * @summary Fetch User Calendars
          * @param {number} userId 
+         * @param {number | null} [year] 
+         * @param {number | null} [month] 
          * @param {number} [offset] 
          * @param {number} [limit] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        fetchUserCalendarsV1UsersUserIdCalendarsGet: async (userId: number, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        fetchUserCalendarsV1CalendarsGet: async (userId: number, year?: number | null, month?: number | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('fetchUserCalendarsV1UsersUserIdCalendarsGet', 'userId', userId)
-            const localVarPath = `/v1/users/{user_id}/calendars`
-                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
+            assertParamExists('fetchUserCalendarsV1CalendarsGet', 'userId', userId)
+            const localVarPath = `/v1/calendars`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -619,6 +646,18 @@ export const CalendarApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
+            }
+
+            if (year !== undefined) {
+                localVarQueryParameter['year'] = year;
+            }
+
+            if (month !== undefined) {
+                localVarQueryParameter['month'] = month;
+            }
 
             if (offset !== undefined) {
                 localVarQueryParameter['offset'] = offset;
@@ -671,6 +710,86 @@ export const CalendarApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 일정을 완료 처리합니다.
+         * @summary Update Calendar Completion
+         * @param {string} calendarId 
+         * @param {BodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost} bodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCalendarCompletionV1CalendarsCalendarIdCompletionPost: async (calendarId: string, bodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost: BodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'calendarId' is not null or undefined
+            assertParamExists('updateCalendarCompletionV1CalendarsCalendarIdCompletionPost', 'calendarId', calendarId)
+            // verify required parameter 'bodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost' is not null or undefined
+            assertParamExists('updateCalendarCompletionV1CalendarsCalendarIdCompletionPost', 'bodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost', bodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost)
+            const localVarPath = `/v1/calendars/{calendar_id}/completion`
+                .replace(`{${"calendar_id"}}`, encodeURIComponent(String(calendarId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(bodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 일정의 \'중요함\' 상태를 업데이트합니다.
+         * @summary Update Calendar Importance
+         * @param {string} calendarId 
+         * @param {BodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch} bodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCalendarImportanceV1CalendarsCalendarIdImportancePatch: async (calendarId: string, bodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch: BodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'calendarId' is not null or undefined
+            assertParamExists('updateCalendarImportanceV1CalendarsCalendarIdImportancePatch', 'calendarId', calendarId)
+            // verify required parameter 'bodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch' is not null or undefined
+            assertParamExists('updateCalendarImportanceV1CalendarsCalendarIdImportancePatch', 'bodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch', bodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch)
+            const localVarPath = `/v1/calendars/{calendar_id}/importance`
+                .replace(`{${"calendar_id"}}`, encodeURIComponent(String(calendarId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(bodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -772,13 +891,15 @@ export const CalendarApiFp = function(configuration?: Configuration) {
          * 유저의 모든 캘린더를 가져옵니다.
          * @summary Fetch User Calendars
          * @param {number} userId 
+         * @param {number | null} [year] 
+         * @param {number | null} [month] 
          * @param {number} [offset] 
          * @param {number} [limit] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async fetchUserCalendarsV1UsersUserIdCalendarsGet(userId: number, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CalendarOutput>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.fetchUserCalendarsV1UsersUserIdCalendarsGet(userId, offset, limit, options);
+        async fetchUserCalendarsV1CalendarsGet(userId: number, year?: number | null, month?: number | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CalendarOutput>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fetchUserCalendarsV1CalendarsGet(userId, year, month, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -789,8 +910,32 @@ export const CalendarApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCalendarV1ContactsContactIdCalendarsCalendarIdGet(contactId: string, calendarId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async getCalendarV1ContactsContactIdCalendarsCalendarIdGet(contactId: string, calendarId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CalendarOutput>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCalendarV1ContactsContactIdCalendarsCalendarIdGet(contactId, calendarId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 일정을 완료 처리합니다.
+         * @summary Update Calendar Completion
+         * @param {string} calendarId 
+         * @param {BodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost} bodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateCalendarCompletionV1CalendarsCalendarIdCompletionPost(calendarId: string, bodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost: BodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CalendarOutput>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateCalendarCompletionV1CalendarsCalendarIdCompletionPost(calendarId, bodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 일정의 \'중요함\' 상태를 업데이트합니다.
+         * @summary Update Calendar Importance
+         * @param {string} calendarId 
+         * @param {BodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch} bodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateCalendarImportanceV1CalendarsCalendarIdImportancePatch(calendarId: string, bodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch: BodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CalendarOutput>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateCalendarImportanceV1CalendarsCalendarIdImportancePatch(calendarId, bodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -854,13 +999,15 @@ export const CalendarApiFactory = function (configuration?: Configuration, baseP
          * 유저의 모든 캘린더를 가져옵니다.
          * @summary Fetch User Calendars
          * @param {number} userId 
+         * @param {number | null} [year] 
+         * @param {number | null} [month] 
          * @param {number} [offset] 
          * @param {number} [limit] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        fetchUserCalendarsV1UsersUserIdCalendarsGet(userId: number, offset?: number, limit?: number, options?: any): AxiosPromise<Array<CalendarOutput>> {
-            return localVarFp.fetchUserCalendarsV1UsersUserIdCalendarsGet(userId, offset, limit, options).then((request) => request(axios, basePath));
+        fetchUserCalendarsV1CalendarsGet(userId: number, year?: number | null, month?: number | null, offset?: number, limit?: number, options?: any): AxiosPromise<Array<CalendarOutput>> {
+            return localVarFp.fetchUserCalendarsV1CalendarsGet(userId, year, month, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * 캘린더를 조회합니다.
@@ -870,8 +1017,30 @@ export const CalendarApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCalendarV1ContactsContactIdCalendarsCalendarIdGet(contactId: string, calendarId: string, options?: any): AxiosPromise<void> {
+        getCalendarV1ContactsContactIdCalendarsCalendarIdGet(contactId: string, calendarId: string, options?: any): AxiosPromise<CalendarOutput> {
             return localVarFp.getCalendarV1ContactsContactIdCalendarsCalendarIdGet(contactId, calendarId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 일정을 완료 처리합니다.
+         * @summary Update Calendar Completion
+         * @param {string} calendarId 
+         * @param {BodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost} bodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCalendarCompletionV1CalendarsCalendarIdCompletionPost(calendarId: string, bodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost: BodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost, options?: any): AxiosPromise<CalendarOutput> {
+            return localVarFp.updateCalendarCompletionV1CalendarsCalendarIdCompletionPost(calendarId, bodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 일정의 \'중요함\' 상태를 업데이트합니다.
+         * @summary Update Calendar Importance
+         * @param {string} calendarId 
+         * @param {BodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch} bodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCalendarImportanceV1CalendarsCalendarIdImportancePatch(calendarId: string, bodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch: BodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch, options?: any): AxiosPromise<CalendarOutput> {
+            return localVarFp.updateCalendarImportanceV1CalendarsCalendarIdImportancePatch(calendarId, bodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch, options).then((request) => request(axios, basePath));
         },
         /**
          * 캘린더를 수정합니다.
@@ -939,14 +1108,16 @@ export class CalendarApi extends BaseAPI {
      * 유저의 모든 캘린더를 가져옵니다.
      * @summary Fetch User Calendars
      * @param {number} userId 
+     * @param {number | null} [year] 
+     * @param {number | null} [month] 
      * @param {number} [offset] 
      * @param {number} [limit] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CalendarApi
      */
-    public fetchUserCalendarsV1UsersUserIdCalendarsGet(userId: number, offset?: number, limit?: number, options?: AxiosRequestConfig) {
-        return CalendarApiFp(this.configuration).fetchUserCalendarsV1UsersUserIdCalendarsGet(userId, offset, limit, options).then((request) => request(this.axios, this.basePath));
+    public fetchUserCalendarsV1CalendarsGet(userId: number, year?: number | null, month?: number | null, offset?: number, limit?: number, options?: AxiosRequestConfig) {
+        return CalendarApiFp(this.configuration).fetchUserCalendarsV1CalendarsGet(userId, year, month, offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -960,6 +1131,32 @@ export class CalendarApi extends BaseAPI {
      */
     public getCalendarV1ContactsContactIdCalendarsCalendarIdGet(contactId: string, calendarId: string, options?: AxiosRequestConfig) {
         return CalendarApiFp(this.configuration).getCalendarV1ContactsContactIdCalendarsCalendarIdGet(contactId, calendarId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 일정을 완료 처리합니다.
+     * @summary Update Calendar Completion
+     * @param {string} calendarId 
+     * @param {BodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost} bodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CalendarApi
+     */
+    public updateCalendarCompletionV1CalendarsCalendarIdCompletionPost(calendarId: string, bodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost: BodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost, options?: AxiosRequestConfig) {
+        return CalendarApiFp(this.configuration).updateCalendarCompletionV1CalendarsCalendarIdCompletionPost(calendarId, bodyUpdateCalendarCompletionV1CalendarsCalendarIdCompletionPost, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 일정의 \'중요함\' 상태를 업데이트합니다.
+     * @summary Update Calendar Importance
+     * @param {string} calendarId 
+     * @param {BodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch} bodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CalendarApi
+     */
+    public updateCalendarImportanceV1CalendarsCalendarIdImportancePatch(calendarId: string, bodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch: BodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch, options?: AxiosRequestConfig) {
+        return CalendarApiFp(this.configuration).updateCalendarImportanceV1CalendarsCalendarIdImportancePatch(calendarId, bodyUpdateCalendarImportanceV1CalendarsCalendarIdImportancePatch, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
