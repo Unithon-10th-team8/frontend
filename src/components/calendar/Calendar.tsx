@@ -26,11 +26,15 @@ export const Calendar = ({
   const yearText = initialDate.format("YYYY");
 
   const handleClickPreviousMonth = () => {
-    setInitialDate(initialDate.subtract(1, "month"));
+    const nextDate = initialDate.subtract(1, "month").date(1);
+    setInitialDate(nextDate);
+    onClickDate?.(nextDate);
   };
 
   const handleClickNextMonth = () => {
+    const nextDate = initialDate.add(1, "month").date(1);
     setInitialDate(initialDate.add(1, "month"));
+    onClickDate?.(nextDate);
   };
 
   return (
