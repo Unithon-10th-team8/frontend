@@ -88,7 +88,7 @@ const AddPage = () => {
       <TextArea placeholder="기타 메모" />
 
       {/* 완료하기 */}
-      <button className="mb-[80px] rounded-12 bg-surface py-[15px] text-center text-[15px] text-[#fff] focus:outline-none">
+      <button className="mb-[80px] mt-auto rounded-12 bg-surface py-[15px] text-center text-[15px] text-[#fff] focus:outline-none">
         완료하기
       </button>
     </div>
