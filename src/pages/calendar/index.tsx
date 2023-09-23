@@ -38,6 +38,9 @@ function PageCalendar() {
   };
   return (
     <div>
+      <div className="w-full border-b-1 border-[#353639] px-20 pb-16 pt-32">
+        <h1 className="animate-title text-[32px] font-bold">달력</h1>
+      </div>
       <Calendar
         data={MOCKUP_CALENDAR_DATA}
         onClickDate={(date) => {
@@ -45,7 +48,7 @@ function PageCalendar() {
         }}
         initialDate={initialDate}
       />
-      <div className="px-20 mt-4">
+      <div className="mt-4 px-20">
         <div className="mb-14 mt-[30px] flex justify-between text-[15px]">
           <p className="">{dateText}일</p>
           <Link href="/calendar/add">
