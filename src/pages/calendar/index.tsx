@@ -1,7 +1,6 @@
 import { Calendar } from "@/components";
-import { MOCKUP_CALENDAR_DATA } from "@/components/calendar/mockup/MockupCalendar";
 import { CONTACT_DETAIL_IMAGE, ETC } from "@/constants";
-import { useGetAllCalendars, useGetCalendarByContactId } from "@/fetchers";
+import { useGetAllCalendars } from "@/fetchers";
 import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
@@ -68,7 +67,7 @@ function PageCalendar() {
           </Link>
         </div>
         <ul className="flex flex-col gap-16">
-          {filteredData?.map(({ is_important, name, contents, id }) => (
+          {filteredData?.map(({ is_important, name, id }) => (
             <li
               className="flex w-full items-center gap-10 rounded-12 bg-[#444444] px-16 py-[15px]"
               key={id}
