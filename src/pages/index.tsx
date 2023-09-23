@@ -1,11 +1,15 @@
-import useCount from "@/store/useCount";
+import MainBanner from "@/features/mainBanner/MainBanner";
+import NotificationBelt from "@/features/notificationBelt/NotificationBelt";
+import TodayContacts from "@/features/todayContacts/TodayContacts";
 
 export default function Home() {
-  const { increaseCount, count } = useCount();
-
   return (
     <>
       <NotificationBelt />
+      <div className="px-[20px] pb-[20px]">
+        <MainBanner />
+        <TodayContacts />
+      </div>
     </>
   );
 }
