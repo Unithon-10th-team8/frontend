@@ -7,6 +7,7 @@ import classNames from "classnames";
 import { useGetAllCalendars } from "@/fetchers";
 import dayjs from "dayjs";
 import { useState } from "react";
+import ComingContacts from "@/features/comingContacts/ComingContacts";
 
 export default function Home() {
   const [initialDate] = useState(dayjs());
@@ -21,6 +22,10 @@ export default function Home() {
       (dayjs(start_dt).isBefore(initialDate, "day") &&
         dayjs(end_dt).isAfter(initialDate, "day")),
   );
+
+  const comingData = contactData?.filter(({ start_dt }) =>
+    dayjs(start_dt).isAfter(initialDate, "day"),
+  );
   return (
     <>
       {filteredData?.length &&
@@ -33,12 +38,13 @@ export default function Home() {
             "animate-title mt-32 text-[32px] font-bold leading-[1.2]",
           )}
         >
-          반가워요 {user?.name}님,
+          {user?.name}님,
           <br />
           활기찬 네트워킹되세요!
         </h1>
         <MainBanner />
         <TodayContacts filteredData={filteredData} />
+        <ComingContacts filteredData={comingData} />
       </div>
     </>
   );
