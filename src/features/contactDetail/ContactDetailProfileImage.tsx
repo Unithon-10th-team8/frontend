@@ -24,7 +24,8 @@ export const ContactDetailProfileImage = ({
   const { setValue } = useFormContext<ContactInput>();
   const { profile_image_url } = useWatch<ContactInput>();
 
-  const disabledImageButton = isLoadingCloudflareImages || isLoadingUploadImage;
+  const disabledImageButton =
+    !isAllowEdit || isLoadingCloudflareImages || isLoadingUploadImage;
 
   const handleUploadImage = () => {
     if (fileRef) {

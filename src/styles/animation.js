@@ -9,6 +9,7 @@ module.exports = {
     jump: "jump 2s ease infinite",
     "fade-in": "fade_in 0.2s ease-in forwards",
     "fade-out": "fade_out 0.2s ease-out forwards",
+    title: "title 0.7s ease-in-out forwards",
   },
   transitionDelay: {
     75: "75ms",
@@ -58,6 +59,16 @@ module.exports = {
     transform: "transform",
   },
   keyframes: {
+    title: {
+      "0%": {
+        opacity: 0,
+        transform: "translateX(-30%)",
+      },
+      "100%": {
+        opacity: 1,
+        transform: "translateX(0)",
+      },
+    },
     fade: {
       "0%": {
         backgroundColor: "rgba(0,0,0,0)",
