@@ -1,15 +1,24 @@
 import { TextArea } from "@/components";
+import { UserSelectModal } from "@/components/userSelectModal/UserSelectModal";
 import { CONTACT_IMAGES } from "@/constants";
+import { TContactItem } from "@/features/contacts/type/TContactItem";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 
 const 카테고리 = ["경조사", "미팅", "식사", "계약"];
 
 const AddPage = () => {
   const { back } = useRouter();
+  const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<TContactItem>({
+    id: 0,
+    name: "",
+    tags: [],
+  });
+
   return (
-    <div className="flex h-full flex-col px-[20px]">
+    <div className="flex flex-col px-[20px]">
       {/* 네비게이션바 */}
       <div className="flex h-48 items-center justify-between py-[14px]">
         <Image
@@ -64,12 +73,13 @@ const AddPage = () => {
       {/* 고객 */}
       <div className="my-[16px] text-[15px] font-medium">고객</div>
       <button
-        className="rounded-12 bg-surface px-16 py-[15px] text-left text-[15px] text-[#696969] focus:outline-none"
+        className="bg-surface rounded-12 px-16 py-[15px] text-left text-[15px] text-[#696969] focus:outline-none"
         placeholder="기타 메모"
-        onClick={() => {}}
+        onClick={() => setOpen(true)}
       >
-        고객 추가
+        {user.id !== 0 ? user.name : "고객 선택"}
       </button>
+      <UserSelectModal isOpen={open} setIsOpen={setOpen} setUser={setUser} />
       {/* 카테고리 */}
       <div className="my-[16px] text-[15px] font-medium">카테고리</div>
       <div className="flex flex-row">
@@ -88,7 +98,7 @@ const AddPage = () => {
       <TextArea placeholder="기타 메모" />
 
       {/* 완료하기 */}
-      <button className="mb-[80px] mt-auto rounded-12 bg-surface py-[15px] text-center text-[15px] text-[#fff] focus:outline-none">
+      <button className="bg-surface mb-[80px] mt-[40px] rounded-12 py-[15px] text-center text-[15px] text-[#fff] focus:outline-none">
         완료하기
       </button>
     </div>
