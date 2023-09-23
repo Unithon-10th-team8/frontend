@@ -2,7 +2,7 @@ import { CONTACT_DETAIL_IMAGE } from "@/constants";
 import Image from "next/image";
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import { useWatch } from "react-hook-form";
-import { Profile } from "./validationSchema";
+import { Profile } from "@/constants";
 
 export type ContactDetailProfileImageProps = {
   isAllowEdit?: boolean;

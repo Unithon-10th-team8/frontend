@@ -7,8 +7,8 @@ module.exports = {
     bounce: "bounce 1s infinite",
     "slide-up": "slide_up 1s forwards",
     jump: "jump 2s ease infinite",
-    "fade-in": "fade_in 0.5s ease-in forwards",
-    "fade-out": "fade_out 0.5s ease-out forwards",
+    "fade-in": "fade_in 0.2s ease-in forwards",
+    "fade-out": "fade_out 0.2s ease-out forwards",
   },
   transitionDelay: {
     75: "75ms",
