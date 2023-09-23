@@ -17,11 +17,18 @@ const getContactTags = (contact: ContactOutput) => {
 export const ContactsListContainer = ({ searchQuery, category }: Props) => {
   const { data: contacts, isLoading } = useGetContacts({});
 
-  const filteredSearchQuery = (contacts ?? []).filter((contact) => {
+  // move items with is_important to the top
+  const sortedContacts = (contacts ?? []).sort((a, b) => {
+    if (a.is_important && !b.is_important) return -1;
+    if (!a.is_important && b.is_important) return 1;
+    return 0;
+  });
+
+  const filteredSearchQuery = (sortedContacts ?? []).filter((contact) => {
     return contact.name.toLowerCase().includes(searchQuery.toLowerCase());
   });
 
-  const filteredCategory = (contacts ?? []).filter((contact) => {
+  const filteredCategory = (sortedContacts ?? []).filter((contact) => {
     return category === "전체"
       ? true
       : contact?.category?.toLowerCase().includes(category.toLowerCase());
