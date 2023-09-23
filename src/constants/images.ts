@@ -34,6 +34,10 @@ const CONTACT_DETAIL_IMAGE = {
   editProfileIcon: "/contacts/detail/edit-profile-icon.svg",
 };
 
+const ETC = {
+  check: "/etc/check.svg",
+};
+
 type ImageObj<T extends string | number> = Record<
   T,
   Record<T, Record<T, T> | T> | T
@@ -61,6 +65,7 @@ const addPathToImageObjects = () =>
     NOTIFICATION_IMAGES,
     CONTACT_IMAGES,
     SIGN_IN,
+    ETC,
   ].forEach(traverseObject);
 
 addPathToImageObjects();
@@ -71,4 +76,5 @@ export {
   NOTIFICATION_IMAGES,
   CONTACT_DETAIL_IMAGE,
   SIGN_IN,
+  ETC,
 };
