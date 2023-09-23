@@ -1,10 +1,11 @@
-import { SIGN_IN } from "@/constants";
+import { API_HOST, SIGN_IN } from "@/constants";
 import Image from "next/image";
 import React from "react";
 
 const SignIn = () => {
   const handleSignIn = () => {
     // 로그인 요청
+    window.location.href = API_HOST + "/v1/social-login/google";
   };
 
   return (
