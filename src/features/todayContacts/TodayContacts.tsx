@@ -1,39 +1,26 @@
+import { CalendarOutput } from "@/api";
 import React from "react";
 
-const contacts = [
-  {
-    id: 0,
-    bgColor: "bg-[#84F44F]",
-    schedule: "12:00 - 14:00",
-    contents: "외부 미팅",
-  },
-  {
-    id: 1,
-    bgColor: "bg-[#f00]",
-    schedule: "12:00 - 14:00",
-    contents: "식사",
-  },
-  {
-    id: 2,
-    bgColor: "bg-[#000]",
-    schedule: "12:00 - 14:00",
-    contents: "계약날",
-  },
-];
+interface Props {
+  filteredData?: CalendarOutput[];
+}
 
-const TodayContacts = () => {
+const TodayContacts = ({ filteredData }: Props) => {
   return (
     <>
       <div className="mb-20 text-[20px] font-bold">오늘의 일정</div>
       <ul className="flex flex-col gap-16">
-        {contacts.map(({ bgColor, schedule, contents, id }) => (
+        {filteredData?.map(({ is_important, name, id }) => (
           <li
             className="flex w-full items-center gap-10 rounded-12 bg-[#353639] px-[20px] py-[24px]"
             key={id}
           >
-            <div className={`h-[9px] w-[9px] rounded-[50%] ${bgColor}`} />
-            <div>{schedule}</div>
-            <div>{contents}</div>
+            <div
+              className={`h-[9px] w-[9px] rounded-[50%] ${
+                is_important ? "bg-accentGreen" : "bg-accentBlue"
+              }`}
+            />
+            <div>{name || "[제목 없음]"}</div>
           </li>
         ))}
       </ul>

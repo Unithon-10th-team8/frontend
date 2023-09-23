@@ -1,12 +1,17 @@
+import { useGetAllCalendars } from "@/fetchers";
+import { useGetUserMe } from "@/fetchers/user";
 import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
-const 전체일정 = 28;
-const 완료한_일정 = 21;
-
-const percentage = Math.round((완료한_일정 / 전체일정) * 100);
-
 const MainBanner = () => {
+  const { data: me } = useGetUserMe();
+  const { data: contactData } = useGetAllCalendars();
+
+  const 전체일정 = contactData?.length || 0;
+  const 완료한_일정 =
+    contactData?.filter(({ is_complete }) => is_complete).length || 0;
+  const percentage = Math.round((완료한_일정 / 전체일정) * 100);
+
   return (
     <div className="flex items-start pb-[42px] pt-[36px]">
       <div className="mr-[22px] h-[120px] w-[120px]">
@@ -26,9 +31,10 @@ const MainBanner = () => {
           {완료한_일정}/{전체일정}
         </div>
         <div className="font-semibold text-20 leading-[150%] ">
-          오늘 민지님의
+          오늘 {me?.name}님의
           <br />
-          <span className="text-[#84F44F]">까미지수</span>는 {percentage}%예요
+          네트워킹 지수는 <span className="text-[#84F44F]">{percentage}%</span>
+          에요
         </div>
       </div>
     </div>
