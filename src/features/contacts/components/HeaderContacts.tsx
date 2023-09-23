@@ -5,11 +5,13 @@ import { HeaderShowMoreButton } from "@/features/contacts/components/header/Head
 
 export const HeaderContacts = () => {
   return (
-    <div className="flex">
+    <div className="flex items-center justify-between px-[20px] py-[10px]">
       <HeaderCategorySelector />
-      <HeaderAddContactButton />
-      <HeaderSearchContactButton />
-      <HeaderShowMoreButton />
+      <div className="flex gap-[16px]">
+        <HeaderAddContactButton />
+        <HeaderSearchContactButton />
+        <HeaderShowMoreButton />
+      </div>
     </div>
   );
 };
