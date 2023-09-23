@@ -8,6 +8,9 @@ dayjs.extend(isSameOrBefore);
 dayjs.extend(weekday);
 
 export const getCalendarDays = (date: Dayjs): Dayjs[] => {
+  if (!date) {
+    return [];
+  }
   // Start from the first day of the month
   const startOfMonth = date.startOf("month");
 

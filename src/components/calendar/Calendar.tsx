@@ -4,14 +4,20 @@ import { IconCalendarChevronLeft } from "@/components/calendar/items/IconCalenda
 import { IconCalendarChevronRight } from "@/components/calendar/items/IconCalendarChevronRight";
 import { generateCalendarDataFromApiData } from "@/components/calendar/modules/generateCalendarDataFromApiData";
 import { getCalendarDays } from "@/components/calendar/modules/getCalendarDays";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { useState } from "react";
 
 type Props = {
-  data: any;
+  data?: any;
+  onClickDate?: (date: Dayjs) => void;
+  initialDate?: Dayjs;
 };
 
-export const Calendar = ({ data }: any) => {
+export const Calendar = ({
+  data,
+  onClickDate,
+  initialDate: initialDateParent,
+}: Props) => {
   const [initialDate, setInitialDate] = useState(dayjs());
   const calendarDate = generateCalendarDataFromApiData(data);
 
@@ -20,11 +26,15 @@ export const Calendar = ({ data }: any) => {
   const yearText = initialDate.format("YYYY");
 
   const handleClickPreviousMonth = () => {
-    setInitialDate(initialDate.subtract(1, "month"));
+    const nextDate = initialDate.subtract(1, "month").date(1);
+    setInitialDate(nextDate);
+    onClickDate?.(nextDate);
   };
 
   const handleClickNextMonth = () => {
+    const nextDate = initialDate.add(1, "month").date(1);
     setInitialDate(initialDate.add(1, "month"));
+    onClickDate?.(nextDate);
   };
 
   return (
@@ -66,6 +76,8 @@ export const Calendar = ({ data }: any) => {
               isCurrentMonth={isCurrentMonth}
               hasPlainEvent={eventData?.hasPlainEvent}
               hasImportantEvent={eventData?.hasImportantEvent}
+              onClickDate={onClickDate}
+              isSelected={date.isSame(initialDateParent, "day")}
             />
           );
         })}

@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import { CalendarOutput } from "@/api";
 
 export const generateCalendarDataFromApiData = (apiData: CalendarOutput[]) => {
+  if (!apiData) return [];
   const resultCalendarData: any[] = [];
 
   apiData.forEach((data) => {

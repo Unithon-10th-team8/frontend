@@ -8,6 +8,7 @@ import { ContactDetailViewHeader } from "./ContactDetailViewHeader";
 import { FormProvider, useForm, useFormState } from "react-hook-form";
 import { Profile, contactDetailValidationSchema } from "@/constants";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ContactDetailCalendar } from "@/features/contactDetail/ContactDetailCalendar";
 
 type Props = {
   profile?: Profile;
@@ -25,7 +26,7 @@ export const ContactDetail = ({ profile }: Props) => {
 
   return (
     <FormProvider {...formMethod}>
-      <div className="flex h-full w-full flex-col gap-16 px-20">
+      <div className="flex w-full flex-col gap-16 px-20">
         {profile ? (
           <ContactDetailViewHeader />
         ) : (
@@ -33,6 +34,7 @@ export const ContactDetail = ({ profile }: Props) => {
         )}
         <ContactDetailProfileImage isAllowEdit={!profile} />
         <ContactDetailDefaultFormItems />
+        <ContactDetailCalendar />
         {isShowOptional ? (
           <ContactDetailOptionalFormItems />
         ) : (
