@@ -29,6 +29,7 @@ module.exports = {
     white: "#fff",
     primary: "#5F95FF",
     accentGreen: "#84F44F",
+    accentBlue: '#5F95FF',
     muted: "#8C8C8C",
     disabled: "#565656",
     surface: "#353639",
