@@ -37,12 +37,13 @@ export const Selector = ({ items, className = "", onChange }: Props) => {
             const isLastItem = index === items.length - 1;
             return (
               <Menu.Item key={index}>
-                {({ active }) => (
+                {({ active, close }) => (
                   <>
                     <button
                       onClick={() => {
                         onChange?.(item);
                         setValue(item || "직장");
+                        close();
                       }}
                       className={"w-48 py-8 text-center font-medium"}
                     >
