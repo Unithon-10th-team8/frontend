@@ -11,7 +11,12 @@ export const Navbar = () => {
       <ul className="flex justify-center gap-16">
         {NAVBAR_MENU_LIST.map((menu, index) => {
           const IconComponent = menu.icon;
-          const isActive = router.pathname === menu.path;
+
+          const isExact = router.pathname === menu.path;
+
+          const isHome = router.pathname === "/";
+          const isSimilar = router.pathname.includes(menu.path);
+          const isActive = isHome ? isExact || isSimilar : isExact;
 
           return (
             <Link
