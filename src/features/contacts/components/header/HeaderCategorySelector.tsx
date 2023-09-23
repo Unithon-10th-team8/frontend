@@ -6,15 +6,23 @@ import { DividerSelector } from "@/features/contacts/components/header/selector/
 
 type Props = {
   className?: string;
+  setCategory: (category: string) => void;
+  category: string;
 };
 
-export const HeaderCategorySelector = ({ className = "" }: Props) => {
+export const HeaderCategorySelector = ({
+  className = "",
+  setCategory,
+  category,
+}: Props) => {
   return (
     <div className={`relative flex items-center px-4 py-2 ${className}`}>
       <Menu>
         <Menu.Button>
           <div className="flex items-center px-4 py-2">
-            <span className="mr-12 text-20 font-bold">전체</span>
+            <span className="mr-12 text-20 font-bold">
+              {category ?? "전체"}
+            </span>
             <Image
               height={6}
               width={12}
@@ -28,11 +36,17 @@ export const HeaderCategorySelector = ({ className = "" }: Props) => {
             const isLastItem = index === HEADER_CATEGORY_LIST.length - 1;
             return (
               <Menu.Item key={index}>
-                {({ active }) => (
+                {({ active, close }) => (
                   <>
-                    <span className={"w-48 py-8 text-center font-medium"}>
+                    <button
+                      className={"w-48 py-8 text-center font-medium"}
+                      onClick={() => {
+                        setCategory(label);
+                        close();
+                      }}
+                    >
                       {label}
-                    </span>
+                    </button>
                     {!isLastItem && <DividerSelector />}
                   </>
                 )}

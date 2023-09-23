@@ -2,6 +2,10 @@ import { TCategoryItem } from "@/features/contacts/type/TCategoryItem";
 
 export const HEADER_CATEGORY_LIST: TCategoryItem[] = [
   {
+    label: "전체",
+    value: "ALL",
+  },
+  {
     label: "직장",
     value: "WORK",
   },

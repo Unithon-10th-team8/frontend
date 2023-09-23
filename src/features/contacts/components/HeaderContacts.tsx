@@ -7,14 +7,24 @@ import { Dispatch, SetStateAction, useState } from "react";
 
 type Props = {
   setSearchQuery: Dispatch<SetStateAction<string>>;
+  setCategory: Dispatch<SetStateAction<string>>;
+  category: string;
 };
 
-export const HeaderContacts = ({ setSearchQuery }: Props) => {
+export const HeaderContacts = ({
+  setSearchQuery,
+  setCategory,
+  category,
+}: Props) => {
   const [isSearchMode, setIsSearchMode] = useState(false);
 
   return (
     <div className="flex h-48 items-center justify-between px-20 py-4">
-      <HeaderCategorySelector className={isSearchMode ? "hidden" : ""} />
+      <HeaderCategorySelector
+        className={isSearchMode ? "hidden" : ""}
+        setCategory={setCategory}
+        category={category}
+      />
       <div
         className={`ml-16 flex items-center gap-16 ${
           isSearchMode ? "flex-1" : ""

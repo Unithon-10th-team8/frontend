@@ -4,6 +4,7 @@ import { useGetContacts } from "@/fetchers";
 
 type Props = {
   searchQuery: string;
+  category: string;
 };
 
 const getContactTags = (contact: ContactOutput) => {
@@ -13,12 +14,21 @@ const getContactTags = (contact: ContactOutput) => {
   return tags;
 };
 
-export const ContactsListContainer = ({ searchQuery }: Props) => {
+export const ContactsListContainer = ({ searchQuery, category }: Props) => {
   const { data: contacts, isLoading } = useGetContacts({});
 
   const filteredSearchQuery = (contacts ?? []).filter((contact) => {
     return contact.name.toLowerCase().includes(searchQuery.toLowerCase());
   });
+
+  const filteredCategory = (contacts ?? []).filter((contact) => {
+    return category === "전체"
+      ? true
+      : contact?.category?.toLowerCase().includes(category.toLowerCase());
+  });
+
+  const finalFiltered =
+    searchQuery === "" ? filteredCategory : filteredSearchQuery;
 
   return (
     <div>
@@ -26,12 +36,12 @@ export const ContactsListContainer = ({ searchQuery }: Props) => {
         <div className="text-muted flex w-full items-center justify-center px-20 py-48">
           로딩중...
         </div>
-      ) : filteredSearchQuery.length === 0 ? (
+      ) : finalFiltered.length === 0 ? (
         <div className="text-muted flex w-full items-center justify-center whitespace-pre-wrap px-20 py-48  text-center">
           {`등록된 연락처가 없습니다.\n"+" 버튼을 클릭해 연락처를 추가해보세요!`}
         </div>
       ) : (
-        filteredSearchQuery.map((contact) => (
+        finalFiltered.map((contact) => (
           <ContactItem
             key={contact.id}
             id={contact.id}
