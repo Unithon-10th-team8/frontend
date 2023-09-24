@@ -1,4 +1,6 @@
 const webpack = require("webpack");
+const withPlugins = require("next-compose-plugins");
+const withPWA = require("next-pwa");
 
 /**
  * next/image 허용 호스트 배열
@@ -42,4 +44,16 @@ const nextConfig = {
   transpilePackages: [],
 };
 
-module.exports = nextConfig;
+module.exports = withPlugins(
+  [
+    [
+      withPWA,
+      {
+        pwa: {
+          dest: "public",
+        },
+      },
+    ],
+  ],
+  nextConfig,
+);
