@@ -24,6 +24,17 @@ module.exports = {
     ringOpacity: false,
   },
   theme: {
+    extend: {
+      keyframes: {
+        intro: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-900px)" },
+        },
+      },
+      animation: {
+        rolling: "intro 30000ms linear infinite",
+      },
+    },
     screens,
     colors: defaultColors,
     ...animation,

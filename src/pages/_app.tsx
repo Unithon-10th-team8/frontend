@@ -11,7 +11,6 @@ dayjs.locale("ko");
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-
   return (
     <SWRConfig>
       <AppLayout>
