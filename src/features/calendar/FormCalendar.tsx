@@ -1,9 +1,13 @@
-import { TextArea } from "@/components";
+import { InputGroup, TextArea, TextButton } from "@/components";
 import { DatePicker } from "@/components/datePicker/DatePicker";
 import { UserSelectModal } from "@/components/userSelectModal/UserSelectModal";
 import { CONTACT_IMAGES } from "@/constants";
 import { TContactItem } from "@/features/contacts/type/TContactItem";
-import { useCreateCalendar } from "@/fetchers";
+import {
+  useCreateCalendar,
+  useDeleteCalendar,
+  useUpdateCalendar,
+} from "@/fetchers";
 import { useGetCalendarByCalendarId } from "@/fetchers/calendar/useGetCalendarByCalendarId";
 import classNames from "classnames";
 import dayjs from "dayjs";
@@ -27,6 +31,8 @@ export const FormCalendar = ({ isEditMode }: Props) => {
     tags: [],
   });
   const { trigger, isMutating, error } = useCreateCalendar();
+  const { trigger: triggerDelete } = useDeleteCalendar();
+  const { trigger: triggerUpdate } = useUpdateCalendar();
   const router = useRouter();
 
   const calendarId = query.calendarId as string;
@@ -68,6 +74,24 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       // },
     };
 
+    if (isEditMode) {
+      await toast.promise(
+        triggerUpdate({
+          calendarId: calendarId,
+          contactId: data?.contacts?.[0]?.id ?? "",
+          calendar: apiFormValues as any,
+        }),
+        {
+          loading: "일정을 수정하는 중...",
+          success: "일정이 수정되었습니다!",
+          error: "일정 수정을 실패했습니다.",
+        },
+      );
+
+      router.push("/calendar");
+      return;
+    }
+
     await toast.promise(
       trigger({
         contactId: user.id,
@@ -83,6 +107,24 @@ export const FormCalendar = ({ isEditMode }: Props) => {
     mutate();
 
     router.push("/calendar");
+  };
+
+  const handleDelete = async () => {
+    if (calendarId) {
+      await toast.promise(
+        triggerDelete({
+          calendarId: calendarId,
+          contactId: data?.contacts?.[0]?.id ?? "",
+        }),
+        {
+          loading: "일정을 삭제하는 중...",
+          success: "일정이 삭제되었습니다!",
+          error: "일정 삭제를 실패했습니다.",
+        },
+      );
+
+      router.push("/calendar");
+    }
   };
 
   useEffect(() => {
@@ -309,11 +351,22 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       />
       {/* 완료하기 */}
       <button
-        className="mb-[80px] mt-[40px] rounded-12 bg-[#5F95FF] py-[15px] text-center text-[15px] text-[#fff] focus:outline-none"
+        className="mb-[40px] mt-[40px] rounded-12 bg-[#5F95FF] py-[15px] text-center text-[15px] text-[#fff] focus:outline-none"
         onClick={handleSubmit}
       >
         완료하기
       </button>
+      {isEditMode && (
+        <InputGroup>
+          <TextButton
+            onClick={handleDelete}
+            variant="danger"
+            className="w-full px-16 py-[15px] !text-[15px] !font-[400]"
+          >
+            일정 삭제
+          </TextButton>
+        </InputGroup>
+      )}
     </div>
   );
 };
