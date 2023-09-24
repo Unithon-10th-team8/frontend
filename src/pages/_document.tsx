@@ -18,6 +18,10 @@ export default function Document() {
           sizes="32x32"
         />
         <link rel="apple-touch-icon" href="/apple-icon-180x180.png"></link>
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        ></meta>
       </Head>
       <body>
         <Main />
