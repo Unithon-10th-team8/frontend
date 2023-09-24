@@ -3,7 +3,11 @@ import { DatePicker } from "@/components/datePicker/DatePicker";
 import { UserSelectModal } from "@/components/userSelectModal/UserSelectModal";
 import { CONTACT_IMAGES } from "@/constants";
 import { TContactItem } from "@/features/contacts/type/TContactItem";
-import { useCreateCalendar, useDeleteCalendar } from "@/fetchers";
+import {
+  useCreateCalendar,
+  useDeleteCalendar,
+  useUpdateCalendar,
+} from "@/fetchers";
 import { useGetCalendarByCalendarId } from "@/fetchers/calendar/useGetCalendarByCalendarId";
 import classNames from "classnames";
 import dayjs from "dayjs";
@@ -28,6 +32,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
   });
   const { trigger, isMutating, error } = useCreateCalendar();
   const { trigger: triggerDelete } = useDeleteCalendar();
+  const { trigger: triggerUpdate } = useUpdateCalendar();
   const router = useRouter();
 
   const calendarId = query.calendarId as string;
@@ -68,6 +73,24 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       //   frequency: "일",
       // },
     };
+
+    if (isEditMode) {
+      await toast.promise(
+        triggerUpdate({
+          calendarId: calendarId,
+          contactId: data?.contacts?.[0]?.id ?? "",
+          calendar: apiFormValues as any,
+        }),
+        {
+          loading: "일정을 수정하는 중...",
+          success: "일정이 수정되었습니다!",
+          error: "일정 수정을 실패했습니다.",
+        },
+      );
+
+      router.push("/calendar");
+      return;
+    }
 
     await toast.promise(
       trigger({
