@@ -23,7 +23,7 @@ export const MyPage = () => {
   return (
     <FormProvider {...formMethod}>
       <div className="w-full border-b-1 border-[#353639] px-20 pb-16 pt-32">
-        <h1 className="animate-title text-[32px] font-bold">연락책</h1>
+        <h1 className="animate-title text-[32px] font-bold">내 소개</h1>
       </div>
       <div className="flex w-full flex-col gap-16 px-20">
         <MyPageProfileImage />
