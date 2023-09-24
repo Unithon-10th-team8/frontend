@@ -58,7 +58,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       content: formValues.memo,
       // is_complete: true,
       // completed_at: "2023-09-23T14:23:32.341165Z",
-      // is_repeat: true,
+      is_repeat: false,
       tags: formValues.tags,
       // recurring_input: {
       //   start_dt: "2023-09-23T17:01:52.781655Z",
@@ -66,7 +66,6 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       //   interval: 6,
       //   frequency: "일",
       // },
-      is_repeat: formValues.remindInterval > 0 ? true : false,
     };
 
     await toast.promise(

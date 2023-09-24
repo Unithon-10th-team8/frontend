@@ -62,14 +62,24 @@ export const ContactDetailDefaultFormItems = ({ isAllowEdit }: Props) => {
           control={control}
           name="phone"
           render={({ field: { value, ...field } }) => (
-            <Input
-              {...field}
-              value={removeNull(value)}
-              readOnly={!isAllowEdit}
-              className={isAllowEdit ? "" : "cursor-default"}
-              variant="start"
-              placeholder="연락처"
-            />
+            <div className="relative">
+              <Input
+                {...field}
+                value={removeNull(value)}
+                readOnly={!isAllowEdit}
+                className={isAllowEdit ? "" : "cursor-default"}
+                variant="start"
+                placeholder="연락처"
+              />
+              {!isAllowEdit && (
+                <a
+                  href={`tel:${value}`}
+                  className="text-muted absolute right-[30px] top-[14px]"
+                >
+                  <button>전화걸기</button>
+                </a>
+              )}
+            </div>
           )}
         />
         <InputGroupDivider />
@@ -77,14 +87,24 @@ export const ContactDetailDefaultFormItems = ({ isAllowEdit }: Props) => {
           control={control}
           name="email"
           render={({ field: { value, ...field } }) => (
-            <Input
-              {...field}
-              value={removeNull(value)}
-              readOnly={!isAllowEdit}
-              className={isAllowEdit ? "" : "cursor-default"}
-              variant="end"
-              placeholder="이메일"
-            />
+            <div className="relative">
+              <Input
+                {...field}
+                value={removeNull(value)}
+                readOnly={!isAllowEdit}
+                className={isAllowEdit ? "" : "cursor-default"}
+                variant="end"
+                placeholder="이메일"
+              />
+              {!isAllowEdit && (
+                <a
+                  href={`mailto:${value}`}
+                  className="text-muted absolute right-[30px] top-[14px]"
+                >
+                  <button>메일 보내기</button>
+                </a>
+              )}
+            </div>
           )}
         />
       </InputGroup>

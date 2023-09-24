@@ -1,4 +1,5 @@
 import { Calendar } from "@/components";
+import { CallToAction } from "@/components/callToAction/CallToAction";
 import { CONTACT_DETAIL_IMAGE, ETC } from "@/constants";
 import { useGetAllCalendars, useUpdateCalendarCompletion } from "@/fetchers";
 import classNames from "classnames";
@@ -14,7 +15,7 @@ function PageCalendar() {
   const dateText = initialDate.format("D");
 
   const { query } = useRouter();
-
+  const router = useRouter();
   const { data, mutate } = useGetAllCalendars();
 
   const {
@@ -32,6 +33,8 @@ function PageCalendar() {
       (dayjs(start_dt).isBefore(initialDate, "day") &&
         dayjs(end_dt).isAfter(initialDate, "day")),
   );
+
+  const isEmpty = !filteredData || filteredData.length === 0;
 
   const handleComplete = async (id: string) => {
     // TODO: 완료 api 호출
@@ -61,7 +64,7 @@ function PageCalendar() {
         }}
         initialDate={initialDate}
       />
-      <div className="px-20 mt-4">
+      <div className="mt-4 px-20">
         <div className="mb-14 mt-[30px] flex justify-between text-[15px]">
           <p className="">{dateText}일</p>
           <Link href="/calendar/add">
@@ -69,6 +72,14 @@ function PageCalendar() {
           </Link>
         </div>
         <ul className="flex flex-col gap-16">
+          {isEmpty && (
+            <CallToAction
+              ctaLineOneText="오늘의 일정이 없습니다."
+              ctaLineTwoText="새로운 일정을 추가해보세요!"
+              ctaButtonText="일정 추가하기"
+              ctaButtonOnClick={() => router.push("/calendar/add")}
+            />
+          )}
           {filteredData?.map(({ is_important, name, id, is_complete }) => (
             <li
               className="flex w-full items-center gap-10 rounded-12 bg-[#444444] px-16 py-[15px]"
