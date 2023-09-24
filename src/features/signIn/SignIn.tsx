@@ -1,9 +1,14 @@
-import { API_HOST, SIGN_IN } from "@/constants";
+import { API_HOST, ETC, NOTIFICATION_IMAGES, SIGN_IN } from "@/constants";
 import Image from "next/image";
 import React from "react";
-import Logo from "public/KAMY.svg";
 
-const Logos = ["Birthday", "Contract", "Meal", "Meeting", "Obituary"];
+const Logos = [
+  NOTIFICATION_IMAGES.birthday,
+  NOTIFICATION_IMAGES.contract,
+  NOTIFICATION_IMAGES.meal,
+  NOTIFICATION_IMAGES.obituary,
+  NOTIFICATION_IMAGES.meeting,
+];
 const InfiniteScrollingLogos = [...Logos, ...Logos];
 
 const SignIn = () => {
@@ -16,7 +21,7 @@ const SignIn = () => {
     <div className="flex h-full flex-col px-[20px]">
       <div className="flex h-full flex-col items-center justify-center">
         <Image
-          src={Logo}
+          src={ETC.KAMY}
           alt="logo"
           width={244}
           height={140}
@@ -34,7 +39,7 @@ const SignIn = () => {
                 className="h-[160px] w-[160px] flex-shrink-0"
               >
                 <Image
-                  src={`/${imageName}.svg`}
+                  src={imageName}
                   alt="imageName"
                   width={160}
                   height={160}

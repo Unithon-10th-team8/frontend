@@ -37,6 +37,7 @@ const CONTACT_DETAIL_IMAGE = {
 const ETC = {
   check: "/etc/check.svg",
   bell: "/etc/bell.svg",
+  KAMY: "/etc/KAMY.svg",
 };
 
 type ImageObj<T extends string | number> = Record<
