@@ -17,6 +17,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const 카테고리 = ["경조사", "미팅", "식사", "계약"];
+const REMIND_INTERVAL_FACTOR = 1440;
 
 type Props = {
   isEditMode?: boolean;
@@ -58,7 +59,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
       start_dt: dayjs(formValues.startDate).toISOString(),
       end_dt: dayjs(formValues.endDate).toISOString(),
       is_all_day: true,
-      remind_interval: formValues.remindInterval * 1440,
+      remind_interval: formValues.remindInterval * REMIND_INTERVAL_FACTOR,
       is_important: formValues.isImportant,
 
       content: formValues.memo,
@@ -136,7 +137,7 @@ export const FormCalendar = ({ isEditMode }: Props) => {
         tags: data.calendar.tags ?? [],
         memo: data.calendar.content ?? "",
         isImportant: data.calendar.is_important,
-        remindInterval: data.calendar.remind_interval,
+        remindInterval: data.calendar.remind_interval / REMIND_INTERVAL_FACTOR,
       });
 
       setUser({
