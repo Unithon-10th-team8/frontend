@@ -41,7 +41,7 @@ jobs:
     - name: Checkout GitOps repository
       uses: actions/checkout@v3
       with:
-        repository: Unithon-10th-team8/devops
+        repository: dokdo2013/haenu-cluster
         token: ${{ secrets.GITOPS_TOKEN }}
         path: gitops
 
@@ -49,7 +49,7 @@ jobs:
       run: |
         IMAGE_NAME="unithon-frontend-main"
         APP_NAME="frontend-main"
-        cd gitops/app/${APP_NAME}
+        cd gitops/apps/unithon/${APP_NAME}
         sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:${{ github.run_number }}|g" deployment.yaml
         git config user.name "dokdo2013"
         git config user.email "hyeonwoo5342@gmail.com"
